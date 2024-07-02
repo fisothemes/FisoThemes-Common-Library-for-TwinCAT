@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_ResetOnTrue" Id="{13e4275b-f9c3-0091-3001-b4112664bcdc}" SpecialFunc="None">
+    <Declaration><![CDATA[// Sets the boolean value to false if it is true and returns true if it was true before being set.
+FUNCTION F_ResetOnTrue : BOOL // Whether the value was true before resetting.
+VAR_INPUT
+	bValue : REFERENCE TO BOOL; // Boolean value to reset.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bValue THEN bValue := FALSE; F_ResetOnTrue := TRUE; END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

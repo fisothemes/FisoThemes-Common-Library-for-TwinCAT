@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetAddressFromInterface" Id="{fe3da011-f2b4-04bb-202c-ae361e067883}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the memory address of an object given its interface.
+FUNCTION F_GetAddressFromInterface : POINTER TO BYTE // A pointer to the memory address of the object corresponding to the provided interface pointer.
+VAR_INPUT
+	ipInterface : __SYSTEM.IQueryInterface; // The interface from which the address of the object will be extracted.
+END_VAR
+VAR
+	pInterface : POINTER TO POINTER TO BYTE := ADR(ipInterface);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetAddressFromInterface := SEL(ipInterface <> 0, 0, pInterface^ - SIZEOF(ipInterface));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

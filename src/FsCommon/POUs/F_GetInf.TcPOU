@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetInf" Id="{a54a29e2-7027-0a3f-10f3-ad3832c32c82}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the positive infinity value for LREAL data type.
+FUNCTION F_GetInf : LREAL // The positive infinity value.
+VAR_STAT
+	fInf : LREAL := TO_LREAL('#Inf');
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetInf := fInf;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

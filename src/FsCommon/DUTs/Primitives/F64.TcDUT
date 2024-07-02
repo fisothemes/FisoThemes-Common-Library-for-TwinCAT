@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="F64" Id="{3372bce3-0f1d-039e-36aa-16562ff92acf}">
+    <Declaration><![CDATA[TYPE F64 : LREAL; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

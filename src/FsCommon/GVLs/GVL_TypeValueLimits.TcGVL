@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_TypeValueLimits" Id="{cad2ba25-88f1-0291-02d3-585f43bbee5e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+    // Minimum and maximum values for BYTE type
+    BYTE_MIN        : BYTE           := 0;          // Minimum value for BYTE
+    BYTE_MAX        : BYTE           := 255;        // Maximum value for BYTE
+    
+    // Minimum and maximum values for WORD type
+    WORD_MIN        : WORD           := 16#0;       // Minimum value for WORD
+    WORD_MAX        : WORD           := 16#FFFF;    // Maximum value for WORD
+    
+    // Minimum and maximum values for DWORD type
+    DWORD_MIN       : DWORD          := 16#0;       // Minimum value for DWORD
+    DWORD_MAX       : DWORD          := 16#FFFFFFFF;// Maximum value for DWORD
+    
+    // Minimum and maximum values for LWORD type
+    LWORD_MIN       : LWORD          := 16#0;				 // Minimum value for LWORD
+    LWORD_MAX       : LWORD          := 16#FFFFFFFFFFFFFFFF; // Maximum value for LWORD
+    
+    // Minimum and maximum values for SINT type
+    SINT_MIN        : SINT           := -128;       // Minimum value for SINT
+    SINT_MAX        : SINT           := +127;       // Maximum value for SINT
+    
+    // Minimum and maximum values for UINT type
+    UINT_MIN        : UINT           := 0;          // Minimum value for UINT
+    UINT_MAX        : UINT           := 65535;      // Maximum value for UINT
+    
+    // Minimum and maximum values for INT type
+    INT_MIN         : INT            := -32768;     // Minimum value for INT
+    INT_MAX         : INT            := +32767;     // Maximum value for INT
+    
+    // Minimum and maximum values for UDINT type
+    UDINT_MIN       : UDINT          := 0;				// Minimum value for UDINT
+    UDINT_MAX       : UDINT          := 4_294_967_295; 	// Maximum value for UDINT
+    
+    // Minimum and maximum values for DINT type
+    DINT_MIN        : DINT           := -2_147_483_648; // Minimum value for DINT
+    DINT_MAX        : DINT           := +2_147_483_647; // Maximum value for DINT
+    
+    // Minimum and maximum values for ULINT type
+    ULINT_MIN       : ULINT          := 0;							// Minimum value for ULINT
+    ULINT_MAX       : ULINT          := 18_446_744_073_709_551_615; // Maximum value for ULINT
+    
+    // Minimum and maximum values for LINT type
+    LINT_MIN        : LINT           := -9_223_372_036_854_775_808; // Minimum value for LINT
+    LINT_MAX        : LINT           := +9_223_372_036_854_775_807; // Maximum value for LINT
+    
+    // Minimum and maximum values for REAL type
+    REAL_MIN        : REAL           := -3.402823E+38; // Minimum value for REAL
+    REAL_MAX        : REAL           := +3.402823E+38; // Maximum value for REAL
+    
+    // Minimum and maximum values for LREAL type
+    LREAL_MIN       : LREAL          := -1.7976931348623158E+308; // Minimum value for LREAL
+    LREAL_MAX       : LREAL          := +1.7976931348623158E+308; // Maximum value for LREAL
+    
+    // Minimum and maximum values for TIME type
+    TIME_MIN        : TIME           := T#0S;       // Minimum value for TIME
+    TIME_MAX        : TIME           := T#49D17H2M47S295MS; // Maximum value for TIME
+    
+    // Minimum and maximum values for LTIME type
+    LTIME_MIN       : LTIME          := LTIME#0S;   // Minimum value for LTIME
+    LTIME_MAX       : LTIME          := LTIME#213503D23H34M33S709MS551US615NS; // Maximum value for LTIME
+    
+    // Minimum and maximum values for DATE type
+    DATE_MIN        : DATE           := D#1970-01-01; // Minimum value for DATE
+    DATE_MAX        : DATE           := D#2106-02-07; // Maximum value for DATE
+    
+    // Minimum and maximum values for DT (DateTime) type
+    DT_MIN          : DT             := DT#1970-1-1-0:0:0; // Minimum value for DT
+    DT_MAX          : DT             := DT#2106-02-07-06:28:15; // Maximum value for DT
+    
+    // Minimum and maximum values for TOD (Time of Day) type
+    TOD_MIN         : TOD            := TOD#0:0:0; // Minimum value for TOD
+    TOD_MAX         : TOD            := TOD#23:59:59.999; // Maximum value for TOD
+    
+    // Minimum and maximum values for T_Size type
+    T_SIZE_MIN      : T_Size         := UDINT_MIN;  // Minimum value for T_Size
+    T_SIZE_MAX      : T_Size         := UDINT_MAX;  // Maximum value for T_Size
+    
+    // Minimum and maximum values for T_Position type
+    T_POSITION_MIN  : T_Position     := LINT_MIN;   // Minimum value for T_Position
+    T_POSITION_MAX  : T_Position     := LINT_MAX;   // Maximum value for T_Position
+END_VAR
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

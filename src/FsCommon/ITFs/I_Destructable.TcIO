@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Destructable" Id="{6b140815-fea6-0d69-0c9e-3370efdc579b}">
+    <Declaration><![CDATA[// Interface to indicate that an object has resources that need to be released.
+INTERFACE I_Destructable EXTENDS __SYSTEM.IQueryInterface]]></Declaration>
+    <Method Name="FB_exit" Id="{e0ec05e3-4e10-0052-3529-0b3d8e21d5a4}">
+      <Declaration><![CDATA[METHOD FB_exit : BOOL
+VAR_INPUT
+	bInCopyCode : BOOL; // if TRUE, the exit method is called for exiting an instance that is copied afterwards (online change).
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

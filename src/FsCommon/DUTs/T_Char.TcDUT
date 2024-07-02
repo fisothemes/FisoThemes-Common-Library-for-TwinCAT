@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_Char" Id="{3574fb77-fae6-08e6-181c-545816d08d50}">
+    <Declaration><![CDATA[// Type alias for a single character string.
+TYPE T_Char : STRING(1); END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

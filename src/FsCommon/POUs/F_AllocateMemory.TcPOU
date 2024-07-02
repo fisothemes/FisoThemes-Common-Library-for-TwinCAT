@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_AllocateMemory" Id="{70e3e9d2-411f-0b5e-1fa9-f969b61cbbc7}" SpecialFunc="None">
+    <Declaration><![CDATA[// Allocates a block of dynamic memory of the specified size.
+FUNCTION F_AllocateMemory : POINTER TO BYTE // A pointer to the beginning of the newly allocated memory block.
+VAR_INPUT
+	Size : T_Size; // The size, in bytes, of the memory block to be allocated.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_AllocateMemory := __NEW(BYTE, Size);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_RandomNumberGenerator" Id="{226056e2-167b-06c6-1911-336bcd68cfcc}" SpecialFunc="None">
+    <Declaration><![CDATA[// Generates pseudo-random numbers.
+// [init] <Instance Name> : FB_RandomNumberGenerator(<Initial Seed>);
+// [note] The methods in this function block can be called using ADS-RPC.
+{attribute 'enable_dynamic_creation'}
+{attribute 'no_explicit_call' := 'direct call for this function block is not allowed'}
+FUNCTION_BLOCK FINAL FB_RandomNumberGenerator IMPLEMENTS __SYSTEM.IQueryInterface
+VAR
+	_nSeed : LINT;
+END_VAR
+VAR_STAT CONSTANT
+	_nLGC_M : LINT := LINT#9223372036854775783;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Internal" Id="{bc236047-5127-0481-0d26-a392d8ad101b}" />
+    <Method Name="FB_init" Id="{896a0906-10ef-0207-0a6e-8f6fb0a5783a}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains 	: BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode 	: BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	nSeed 			: LINT; // Initial seed value for the generator.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._nSeed := nSeed;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetSystemEntropy" Id="{59ce7d84-772f-0a49-1416-364cf94b7c6f}" FolderPath="Internal\">
+      <Declaration><![CDATA[// Generates additional entropy based on system timestamp, task time and CPU cycle.
+METHOD PRIVATE GetSystemEntropy : LINT // System entropy.
+VAR_INPUT
+	nSeed : LINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetSystemEntropy := TO_LINT(TO_ULINT(nSeed) XOR Tc2_System.F_GetSystemTime() XOR Tc2_System.F_GetTaskTime() XOR F_GetCpuCycleCounter());]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="LinearCongruentialGenerator" Id="{3c4abec4-a5db-0b19-193d-a091ec101b91}" FolderPath="Internal\">
+      <Declaration><![CDATA[// LCG formula for updating the seed.
+METHOD PRIVATE LinearCongruentialGenerator : LINT // New seed value.
+VAR_INPUT
+	nSeed : LINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[LinearCongruentialGenerator := (LINT#6364136223846793005 * nSeed * LINT#1442695040888963407) MOD THIS^._nLGC_M;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NextInt" Id="{ffdc2887-8ec3-0ab1-349e-885074b48210}">
+      <Declaration><![CDATA[// Generates the next pseudo-random integer.
+{attribute 'TcRpcEnable'}
+METHOD NextInt : LINT // The next pseudo-random integer.
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[NextInt := THIS^._nSeed := THIS^.LinearCongruentialGenerator(TO_LINT(TO_ULINT(THIS^._nSeed) XOR TO_ULINT(THIS^.GetSystemEntropy(THIS^._nSeed))));]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NextRangedInt" Id="{7ac16fc5-504a-0688-3967-be44fbe2debe}">
+      <Declaration><![CDATA[// Generates the next pseudo-random integer within the specified range [minimum, maximum].
+{attribute 'TcRpcEnable'}
+METHOD NextRangedInt : LINT // The next pseudo-random integer within the range.
+VAR_INPUT
+	nMinimum : LINT; // Minimum value of the range. 
+	nMaximum : LINT; // Maximum value of the range.
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[NextRangedInt := MIN(nMinimum, nMaximum) + (ABS(THIS^.NextInt()) MOD (MAX(nMinimum, nMaximum) - MIN(nMinimum, nMaximum) + 1));]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NextRangedReal" Id="{641a03e3-dc8c-00a3-3424-bda44e756217}">
+      <Declaration><![CDATA[// Generates the next pseudo-random real number within the specified range [minimum, maximum].
+{attribute 'TcRpcEnable'}
+METHOD NextRangedReal : LREAL // The next pseudo-random real number within the range.
+VAR_INPUT
+	fMinimum : LREAL; // Minimum value of the range. 
+	fMaximum : LREAL; // Maximum value of the range.
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[NextRangedReal := MIN(fMinimum, fMaximum) + (ABS(THIS^.NextReal()) * (MAX(fMinimum, fMaximum) - MIN(fMinimum, fMaximum)));]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NextReal" Id="{d3743c55-05b1-0a34-38fa-5f5239b8879c}">
+      <Declaration><![CDATA[// Generates the next pseudo-random real number.
+{attribute 'TcRpcEnable'}
+METHOD NextReal : LREAL // The next pseudo-random real number.
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[NextReal := TO_LREAL(THIS^.NextInt()) / TO_LREAL(THIS^._nLGC_M + 1);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_SetDecimalPlaces" Id="{4c31ee42-2226-0f43-1656-92ad646ccde7}" SpecialFunc="None">
+    <Declaration><![CDATA[// Sets the specified number of decimal places for a given real value.
+FUNCTION F_SetDecimalPlaces : LREAL // The value rounded to the specified number of decimal places.
+VAR_INPUT
+	fValue 			: LREAL; // The input floating-point value to be rounded.
+	nDecimalPlaces 	: USINT; // The number of decimal places to round to.
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_SetDecimalPlaces := TO_DINT(fValue * EXPT(10, nDecimalPlaces)) / EXPT(10, nDecimalPlaces);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="PLAYGROUND" Id="{dcdb4b50-8d81-4429-b3ed-96a8dd4a7602}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'direct call for this program is not allowed'} 
+PROGRAM INTERNAL PLAYGROUND
+VAR
+	nCpuCycle				: ULINT;
+	eOpSys 					: E_OperatingSystem;
+	eProcArc				: E_ProcessorArchitecture;
+	ipTaskInfo 				: I_PlcTaskInformation;
+	fbTaskInfo 				: FB_PlcTaskInformation;
+	fbTaskCycleChanged		: FB_PlcTaskCycleChangeDetector(1); 
+	nHash 					: DWORD;
+	AmsPort 				: Tc2_System.T_AmsPort;
+	CycleTime, LastExecTime : LTIME;
+	i, j, Count, Size 			: T_Size := F_GetNumberOfPlcTasks();
+	Str 					: STRING := '123456789';
+	fbGenRand				: FB_RandomNumberGenerator(0);
+	nRand1, nRand2			: LINT;
+	fRand1, fRand2			: LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[nHash := F_Hash(ADR(Str), F_PositionToSize(LEN(Str)), 0);
+
+nCpuCycle		:= F_GetCpuCycleCounter();
+eProcArc 		:= P_GetSystemInformation.ProcessorArchitecture;
+eOpSys 			:= P_GetSystemInformation.OperatingSystem;
+AmsPort 		:= F_GetCurrentPlcTaskInformation().AdsPort;
+CycleTime 		:= F_GetCurrentPlcTaskInformation().CycleTime;
+LastExecTime 	:= F_GetCurrentPlcTaskInformation().LastCycleExecutionTime;
+Count 			:= F_GetCurrentPlcTaskInformation().CycleCount;
+Size 			:= F_GetNumberOfPlcTasks();
+
+nRand1 := fbGenRand.NextInt();
+nRand2 := fbGenRand.NextRangedInt(10, -10);
+fRand1 := fbGenRand.NextReal();
+fRand2 := F_SetDecimalPlaces(fbGenRand.NextRangedReal(-5.8, 9.432), 2);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

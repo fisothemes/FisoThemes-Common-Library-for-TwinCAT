@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="P_GetSystemInformation" Id="{b0e883b6-90aa-0c6d-36b2-0947b0933caf}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves information about the target.
+{attribute 'no_explicit_call' := 'direct call for this program is not allowed'} 
+PROGRAM P_GetSystemInformation]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="CompilerVersion" Id="{91c1a12c-b37a-0e19-3119-cb82109908df}">
+      <Declaration><![CDATA[// The version as defined in the compile options.
+PROPERTY CompilerVersion : VERSION]]></Declaration>
+      <Get Name="Get" Id="{cf466b9a-2f5e-03e0-2ba5-607787a2daac}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CompilerVersion := __SYSTEM.Constants.CompilerVersion;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CompilerVersionNumeric" Id="{e7e5d7f4-c05a-0402-0984-b83bedbdc6b1}">
+      <Declaration><![CDATA[// The version as defined in the compile options.
+PROPERTY CompilerVersionNumeric : DWORD]]></Declaration>
+      <Get Name="Get" Id="{3cd18d96-b606-0fe6-05b0-8a3efb458b26}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CompilerVersionNumeric := __SYSTEM.Constants.CompilerVersionNumeric;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HasFpuSupport" Id="{32b283c3-d4ba-0270-0f42-5b7e5edc3922}">
+      <Declaration><![CDATA[// Indicates of whether the target has FPU support.
+PROPERTY HasFpuSupport : BOOL]]></Declaration>
+      <Get Name="Get" Id="{626ccf4d-7625-0b2b-0ce6-7a56bb32ff7d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HasFpuSupport := __SYSTEM.Constants.bFPUSupport;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="HasMulticoreSupport" Id="{4df5d3ab-89dc-060c-1bb9-c38dfe82a90d}">
+      <Declaration><![CDATA[// Indicates whether multicore support is available in the target.
+PROPERTY HasMulticoreSupport : BOOL]]></Declaration>
+      <Get Name="Get" Id="{4e423ab2-d2fe-0d5d-2003-ddc7f2102e08}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HasMulticoreSupport := __SYSTEM.Constants.bMulticoreSupport;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="InSimulationMode" Id="{5ab8d195-09ee-05f2-36e4-d250a2eb8bf4}">
+      <Declaration><![CDATA[// Indicates if target is in simulation mode.
+PROPERTY InSimulationMode : BOOL]]></Declaration>
+      <Get Name="Get" Id="{4615fa1d-230f-06da-0386-bacf0b1b2a30}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InSimulationMode := __SYSTEM.Constants.bSimulationMode;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsLittleEndian" Id="{a7992363-dceb-0a16-287d-0f34eee98d47}">
+      <Declaration><![CDATA[// Indicates of the system is little endian; TRUE for Intel, ARM etc. FALSE for Power PC, etc. 
+PROPERTY IsLittleEndian : BOOL]]></Declaration>
+      <Get Name="Get" Id="{a14cc85e-b4af-0024-156a-543f1181f1dc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsLittleEndian := __SYSTEM.Constants.bLittleEndian;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="OperatingSystem" Id="{336cc389-1120-079a-326a-175db3d2f3fb}">
+      <Declaration><![CDATA[// Retrieves the operating system of the target.
+PROPERTY OperatingSystem : E_OperatingSystem]]></Declaration>
+      <Get Name="Get" Id="{6ab1df7c-3a9b-0280-106b-51fc293e59e6}">
+        <Declaration><![CDATA[VAR_STAT
+	nOperatingSystem : UDINT;
+	nResult : UDINT := SysTarget.SysTargetGetOperatingSystemId(ADR(nOperatingSystem));
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CASE nOperatingSystem OF
+	1..4: OperatingSystem := E_OperatingSystem.Windows;
+	5: OperatingSystem := E_OperatingSystem.Linux;
+	6: OperatingSystem := E_OperatingSystem.VxWorks;
+	7: OperatingSystem := E_OperatingSystem.QNX;
+	8: OperatingSystem := E_OperatingSystem.uCOS;
+ELSE
+	OperatingSystem := E_OperatingSystem._;
+	END_CASE
+
+
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="PackMode" Id="{7452dbaa-8d53-0e32-1ccc-970af7901e03}">
+      <Declaration><![CDATA[// Retrieves the packmode of the system.
+PROPERTY PackMode : WORD]]></Declaration>
+      <Get Name="Get" Id="{a98370b3-63d6-0bef-2306-0ebcf32cb17f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PackMode := __SYSTEM.Constants.nPackMode;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProcessorArchitecture" Id="{6b336d92-e78b-0b30-0721-8bc6141fb57c}">
+      <Declaration><![CDATA[// Retireves the target's processor architecture.
+PROPERTY ProcessorArchitecture : E_ProcessorArchitecture]]></Declaration>
+      <Get Name="Get" Id="{520417e0-26ec-0961-2c1d-de4d1180fee7}">
+        <Declaration><![CDATA[VAR_STAT
+	nProcessorArchitecture : UDINT;
+	nResult : UDINT := SysTarget.SysTargetGetProcessorId(ADR(nProcessorArchitecture));
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProcessorArchitecture := TO_BYTE(nProcessorArchitecture);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RegisterSize" Id="{47268eef-7ba3-092f-1329-da4031e647cb}">
+      <Declaration><![CDATA[// Retrieves the size of the CPU register; 16 for C16x, 64 for X86-64 Bit, 32 for all other controllers.
+PROPERTY RegisterSize : WORD]]></Declaration>
+      <Get Name="Get" Id="{740e8e51-6ff8-02e9-0958-e23b0ccf06e1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RegisterSize := __SYSTEM.Constants.nRegisterSize;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RuntimeVersion" Id="{584e5609-0718-0ae7-2267-f4de2db2f208}">
+      <Declaration><![CDATA[// The version as described in the runtime system.
+PROPERTY RuntimeVersion : VERSION]]></Declaration>
+      <Get Name="Get" Id="{cde43abf-fc36-0904-312a-05e1680c8f37}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RuntimeVersion := __SYSTEM.Constants.RuntimeVersion;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RuntimeVersionNumeric" Id="{5a19fa5d-847c-03b5-111a-dde1054fed86}">
+      <Declaration><![CDATA[// The version as described in the runtime system.
+PROPERTY RuntimeVersionNumeric : DWORD]]></Declaration>
+      <Get Name="Get" Id="{fa713d99-3d31-04b3-3c56-4e1953f1d2c9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RuntimeVersionNumeric := __SYSTEM.Constants.RuntimeVersionNumeric;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

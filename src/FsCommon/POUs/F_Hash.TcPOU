@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_Hash" Id="{cf54c1f8-c610-0a26-3740-5edbceb78d1b}" SpecialFunc="None">
+    <Declaration><![CDATA[// Computes a hash value for a given block of memory using the MurmurHash3 algorithm.
+// The MurmurHash3 algorithm was created by Austin Appleby. Source: https://en.wikipedia.org/wiki/MurmurHash
+FUNCTION F_Hash : DWORD // The computed hash value.
+VAR_INPUT
+    pAddress 	: POINTER TO BYTE; // The pointer to the beginning of the memory block to be hashed.
+    Size 		: T_Size; // The size, in bytes, of the memory block to be hashed.
+    Seed 		: DWORD; // A seed value for the hash calculation, which can help in generating different hashes for the same data.
+END_VAR
+VAR
+	i 			: T_Position;
+	nK 			: DWORD;
+	nBlocks 	: T_Size;
+	pBlocks		: POINTER TO DWORD;
+	pTail 		: POINTER TO BYTE;
+END_VAR
+VAR_STAT CONSTANT
+	nC1 		: DWORD 			:= 16#CC9E2D51;
+	nC2 		: DWORD 			:= 16#1B873593;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF pAddress = 0 OR Size = 0 THEN RETURN; END_IF
+
+F_Hash := Seed;
+
+nBlocks := Size / 4;
+pBlocks := pAddress + nBlocks * 4;
+
+i := -F_SizeToPosition(nBlocks);
+FOR i := i TO -1 DO
+	nK := pBlocks[i];
+	
+	nK := nK * nC1;
+	nK := SHL(nK, 15) OR SHR(nK, 32 - 15);
+	nK := nK * nC2;
+	
+	F_Hash := F_Hash XOR nK;
+	F_Hash := SHL(F_Hash, 13) OR SHR(F_Hash, 32 - 13);
+	F_Hash := F_Hash * 5 + 16#E6546B64;
+	END_FOR
+	
+nK := 0;
+pTail := pAddress + nBlocks * 4;
+
+i := Size MOD 4;
+
+IF i = 3 THEN 
+	{warning disable C0308}
+	nK := nK XOR SHL(pTail[2], 16); END_IF;
+IF i >= 2 THEN 
+	{warning disable C0308}	
+	nK := nK XOR SHL(pTail[1], 8); END_IF;
+IF i >= 1 THEN
+	nK := nK XOR pTail[0];
+	nK := nK * nC1;
+	nK := SHL(nK, 15) OR SHR(nK, 32 - 15);
+	nK := nK * nC2;
+	F_Hash := F_Hash XOR nK;
+	END_IF;
+
+F_Hash := F_Hash XOR Size;
+F_Hash := F_Hash XOR SHR(F_Hash, 16);
+F_Hash := F_Hash * 16#85EBCA6B;
+F_Hash := F_Hash XOR SHR(F_Hash, 13);
+F_Hash := F_Hash * 16#C2B2AE35;
+F_Hash := F_Hash XOR SHR(F_Hash, 16); ]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

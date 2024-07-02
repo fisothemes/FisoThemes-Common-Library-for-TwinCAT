@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_ChangeDetector" Id="{69563f31-3a03-0f75-1bd5-63482cbbb489}">
+    <Declaration><![CDATA[// Interface for indicating that an object is for detecting the change of some object/value.
+INTERFACE I_ChangeDetector EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Property Name="HasChanged" Id="{8b88e136-4add-0ad9-2874-091307727d57}">
+      <Declaration><![CDATA[// Indicates if the object has changed.
+// [get] Returns flag indicating of object has changed.
+PROPERTY HasChanged : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f713254a-f4c0-0594-2bda-027754937f11}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

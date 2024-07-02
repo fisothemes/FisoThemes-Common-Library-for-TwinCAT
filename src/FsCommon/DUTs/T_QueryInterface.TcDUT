@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_QueryInterface" Id="{ebd27d8f-dbc2-0d7b-240c-1789cde44b12}">
+    <Declaration><![CDATA[TYPE T_QueryInterface : __SYSTEM.IQueryInterface; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

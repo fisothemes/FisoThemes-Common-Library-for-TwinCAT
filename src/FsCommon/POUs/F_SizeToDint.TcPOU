@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_SizeToDint" Id="{7e77e26b-3566-0862-28eb-e27f37aed3cf}" SpecialFunc="None">
+    <Declaration><![CDATA[// Converts a T_Size value to a DINT value.
+FUNCTION F_SizeToDint : DINT // The converted DINT value from the given T_Size.
+VAR_INPUT
+	Size : T_Size; // The input size to be converted.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_SizeToDint := TO_DINT(LIMIT(0, Size, TO_UDINT(GVL_TypeValueLimits.DINT_MAX)));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

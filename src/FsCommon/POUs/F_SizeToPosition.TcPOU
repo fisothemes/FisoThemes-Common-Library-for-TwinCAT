@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_SizeToPosition" Id="{f3bae6ff-1672-07b4-0659-f8cd33d8bd24}" SpecialFunc="None">
+    <Declaration><![CDATA[// Converts a size value to a position value.
+FUNCTION F_SizeToPosition : T_Position // The position value corresponding to the given size.
+VAR_INPUT
+	Size : T_Size; // The size value to be converted to a position value.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_SizeToPosition := Size;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

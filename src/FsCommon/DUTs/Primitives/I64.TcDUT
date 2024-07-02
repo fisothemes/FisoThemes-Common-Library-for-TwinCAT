@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="I64" Id="{08127285-333f-0c28-05c5-230d42ceb5be}">
+    <Declaration><![CDATA[TYPE I64 : LINT; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

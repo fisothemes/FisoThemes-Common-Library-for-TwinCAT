@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_Size" Id="{4ee04fa1-0d24-065d-2124-018c78d976e8}">
+    <Declaration><![CDATA[// Type alias for represeting size or capacity.
+TYPE T_Size : UDINT; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

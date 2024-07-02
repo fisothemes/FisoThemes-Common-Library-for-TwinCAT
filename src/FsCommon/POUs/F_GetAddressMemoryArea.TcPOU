@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetAddressMemoryArea" Id="{5f958e92-11f2-028a-02f4-f3dba624a906}" SpecialFunc="None">
+    <Declaration><![CDATA[// Determines the memory area type of a given pointer.
+FUNCTION F_GetAddressMemoryArea : E_AddressMemoryArea // An enumeration indicating the type of memory area the address belongs to.
+VAR_INPUT
+	pAddress : POINTER TO BYTE; // The memory address pointer to be checked.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Tc2_System.F_CheckMemoryArea(pAddress, 1) OF
+	Tc2_System.E_TcMemoryArea.Static:	F_GetAddressMemoryArea := E_AddressMemoryArea.Static;
+	Tc2_System.E_TcMemoryArea.Dynamic:	F_GetAddressMemoryArea := E_AddressMemoryArea.Dynamic;
+	Tc2_System.E_TcMemoryArea.CNC:		F_GetAddressMemoryArea := E_AddressMemoryArea.CNC;
+ELSE
+	F_GetAddressMemoryArea := E_AddressMemoryArea._;
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

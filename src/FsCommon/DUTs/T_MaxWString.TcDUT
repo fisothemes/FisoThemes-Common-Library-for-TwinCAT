@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_MaxWString" Id="{0760c1fa-a817-0d86-0f0c-9a2e5d271a39}">
+    <Declaration><![CDATA[// Type alias for a wide string with a maximum length of 255 characters.
+TYPE T_MaxWString : WSTRING(255); END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_TaskNameString" Id="{b7424cef-0593-0a3b-0a62-0e929c73ad7d}">
+    <Declaration><![CDATA[TYPE T_TaskNameString : STRING(63); END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

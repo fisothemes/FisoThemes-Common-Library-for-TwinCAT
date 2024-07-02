@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_PositionToSize" Id="{eb361cab-ca35-02d3-3d72-cefcb38e3d81}" SpecialFunc="None">
+    <Declaration><![CDATA[// Converts a position value to a size value, ensuring it falls within the defined limits.
+FUNCTION F_PositionToSize : T_Size // The size value corresponding to the given position, constrained within the minimum and maximum limits of T_Size.
+VAR_INPUT
+	Position : T_Position; // The position value to be converted to a size value.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_PositionToSize := TO_UDINT(
+	LIMIT(
+		GVL_TypeValueLimits.T_SIZE_MIN, 
+		Position, 
+		GVL_TypeValueLimits.T_SIZE_MAX));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

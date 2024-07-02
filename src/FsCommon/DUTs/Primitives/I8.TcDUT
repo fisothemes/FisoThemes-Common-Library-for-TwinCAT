@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="I8" Id="{86095448-a507-0b1d-3eb9-ba8333db0b2e}">
+    <Declaration><![CDATA[TYPE I8 : SINT; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

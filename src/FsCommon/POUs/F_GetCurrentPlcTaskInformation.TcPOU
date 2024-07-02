@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetCurrentPlcTaskInformation" Id="{c22932ba-811a-07fa-144f-5ee4b5ba6ab0}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the information about the current PLC task.
+FUNCTION F_GetCurrentPlcTaskInformation : I_PlcTaskInformation // An instance of I_PlcTaskInformation containing details of the current PLC task.
+VAR_STAT
+	fbGetCurrentTaskIndex : Tc2_System.GETCURTASKINDEX;
+	fbPlcTaskInformation : FB_PlcTaskInformation;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbGetCurrentTaskIndex();
+fbPlcTaskInformation.Index 		:= fbGetCurrentTaskIndex.Index;
+F_GetCurrentPlcTaskInformation 	:= fbPlcTaskInformation;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

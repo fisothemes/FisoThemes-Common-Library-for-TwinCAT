@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_TypeClass" Id="{7c2ddb7a-1f65-07a9-1274-2c2883426fbb}">
+    <Declaration><![CDATA[TYPE T_TypeClass : __SYSTEM.TYPE_CLASS; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

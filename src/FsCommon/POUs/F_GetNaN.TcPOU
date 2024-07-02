@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetNaN" Id="{2ea10e84-d14e-020e-1a22-c071166b57ed}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the "Not-a-Number" (NaN) value for LREAL data type.
+FUNCTION F_GetNaN : LREAL // The NaN value.
+VAR_STAT
+	fNaN : LREAL := TO_LREAL('#NaN');
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetNaN := fNaN;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_WChar" Id="{26546536-84ed-01ee-3d87-ed30002f9cf2}">
+    <Declaration><![CDATA[// Type alias for a single wide character string.
+TYPE T_WChar : WSTRING(1); END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

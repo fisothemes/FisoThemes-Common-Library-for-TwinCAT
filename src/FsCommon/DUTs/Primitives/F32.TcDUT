@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="F32" Id="{e6a27a94-241a-01ae-2161-3ed54fa5f617}">
+    <Declaration><![CDATA[TYPE F32 : REAL; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

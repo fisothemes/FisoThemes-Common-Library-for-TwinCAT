@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ValueChangeDetector" Id="{a4c2b895-907f-0240-26a6-c39b5ae9d5bf}" SpecialFunc="None">
+    <Declaration><![CDATA[// Detects if the watched variable value has changed.
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK FINAL FB_ValueChangeDetector IMPLEMENTS I_ChangeDetector
+VAR_INPUT
+	Value : ANY; // Value to detect for change.
+END_VAR
+VAR
+	_nHash : DWORD;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="HasChanged" Id="{fdb378bc-2ac2-044c-32a1-ddc081366049}">
+      <Declaration><![CDATA[// Indicates if the value has changed.
+// [get] Returns flag indicating of value has changed.
+PROPERTY HasChanged : BOOL]]></Declaration>
+      <Get Name="Get" Id="{5a6091a5-77bc-07d4-3d20-f22d8b68b36f}">
+        <Declaration><![CDATA[VAR_INST
+	bFirstCall : BOOL := TRUE;
+END_VAR
+VAR
+	nHash : DWORD;
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nHash := F_Hash(THIS^.Value.pValue,
+				F_PositionToSize(THIS^.Value.diSize),
+				THIS^.Value.TypeClass);
+
+HasChanged := THIS^._nHash <> nHash OR_ELSE F_ResetOnTrue(bFirstCall);
+
+IF HasChanged THEN THIS^._nHash := nHash; END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

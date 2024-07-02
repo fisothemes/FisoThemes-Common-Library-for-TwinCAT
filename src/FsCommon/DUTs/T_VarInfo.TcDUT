@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_VarInfo" Id="{7ad3f699-14d5-080d-2a66-bd491f8a61d3}">
+    <Declaration><![CDATA[// Alias for __SYSTEM.VAR_INFO.
+// [use] Stores variable information.
+TYPE T_VarInfo : __SYSTEM.VAR_INFO; END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

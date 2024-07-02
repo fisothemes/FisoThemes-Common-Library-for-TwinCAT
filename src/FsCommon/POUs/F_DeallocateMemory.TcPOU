@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_DeallocateMemory" Id="{9bbccce7-09e0-00f3-1544-34062286a06e}" SpecialFunc="None">
+    <Declaration><![CDATA[// Safely releases a memory pointer. 
+// Ensuring that dynamically allocated memory is properly deallocated,
+// and statically allocated memory pointers are safely nullified to avoid potential memory issues.
+FUNCTION F_DeallocateMemory : BOOL // Indication of whether deallocation was succesful.
+VAR_IN_OUT
+	pAddress : POINTER TO BYTE; // The memory pointer to be released.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT __ISVALIDREF(pAddress) THEN RETURN; END_IF
+
+CASE Tc2_System.F_CheckMemoryArea(pAddress, 1) OF
+	Tc2_System.E_TcMemoryArea.Dynamic:
+		__DELETE(pAddress); 
+ELSE
+	pAddress := 0;
+	END_CASE
+	
+F_DeallocateMemory := TRUE;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

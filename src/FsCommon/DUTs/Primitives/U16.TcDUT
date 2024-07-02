@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="U16" Id="{c9da0d8f-eb00-022f-1220-a05acfb48868}">
+    <Declaration><![CDATA[TYPE U16 : UINT; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

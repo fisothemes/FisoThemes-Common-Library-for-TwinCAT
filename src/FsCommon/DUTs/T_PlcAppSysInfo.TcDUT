@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_PlcAppSysInfo" Id="{3afd102d-2d5e-0282-3a4d-d5d66e7cca2c}">
+    <Declaration><![CDATA[// Type alias for a struct PLC application system information.
+TYPE T_PlcAppSysInfo : PlcAppSystemInfo; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="I32" Id="{1b7bcae5-07c6-0129-315e-4fa0523b8a4c}">
+    <Declaration><![CDATA[TYPE I32 : DINT; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

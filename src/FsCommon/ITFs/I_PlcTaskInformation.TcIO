@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_PlcTaskInformation" Id="{f89e552d-9240-0621-0b97-ae8f76d5aa8c}">
+    <Declaration><![CDATA[// Interface for accessing information about a PLC task.
+INTERFACE I_PlcTaskInformation EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Property Name="AdsPort" Id="{6494721c-c002-0458-376f-e41aae4abffb}">
+      <Declaration><![CDATA[// Task's ADS Port.
+// [get] Returns the referenced task's ADS port.
+PROPERTY AdsPort : UINT]]></Declaration>
+      <Get Name="Get" Id="{f6ff1ebd-ae37-0334-388d-c0c2a1e64818}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="CycleCount" Id="{0e4a5dd8-b181-0063-3df4-528a2e4741e5}">
+      <Declaration><![CDATA[// The task's cycle counter.
+// [note] This refers to the actual system task and not to the task reference of the PLC project.
+// [get] Returns the task's cycle counter.
+PROPERTY CycleCount : UDINT]]></Declaration>
+      <Get Name="Get" Id="{e341c004-6c43-07b4-24a5-109255464549}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="CycleTime" Id="{502dc1d2-7aa9-00a6-2dc1-02ac0dc925b0}">
+      <Declaration><![CDATA[// The cycle time of the task.
+// [get] Returns the cycle time.
+PROPERTY CycleTime : LTIME]]></Declaration>
+      <Get Name="Get" Id="{df547f98-cc21-0cbb-119e-d8d9bfec91bb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="CycleTimeExceeded" Id="{6a2a739d-9d40-0885-1ed7-33db386310e5}">
+      <Declaration><![CDATA[// Indicates whether the cycle time has been exceeded.
+// [get] Returns TRUE if the cycle time has been exceeded.
+PROPERTY CycleTimeExceeded : BOOL]]></Declaration>
+      <Get Name="Get" Id="{ac4d968d-889d-0d03-0dc9-40382f8459dd}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="HasCallAfterOutputUpdateAttribute" Id="{725113a8-0445-0571-1e80-a72bdcedfda1}">
+      <Declaration><![CDATA[// Indicates if the origin of the current call is declared with the attribute 'TcCallAfterOutputUpdate'.
+// [get] Returns TRUE if current call is declared with the attribute 'TcCallAfterOutputUpdate'.
+PROPERTY HasCallAfterOutputUpdateAttribute : BOOL]]></Declaration>
+      <Get Name="Get" Id="{02274dbf-6b45-0eb6-1274-fa4b027babee}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Index" Id="{f09df55f-b9e3-0906-2c0c-07d2f3588e59}">
+      <Declaration><![CDATA[// The index of the task.
+// [get] Returns the index.
+PROPERTY Index : DINT]]></Declaration>
+      <Get Name="Get" Id="{6999d994-b7e5-09a6-34b5-4874dcc22c99}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="IsFirstCycle" Id="{05e305d6-55c3-0a90-22cf-d6b85f259496}">
+      <Declaration><![CDATA[// Indicates if it is the first cycle of the task.
+// [get] Returns TRUE if it is the first cycle.
+PROPERTY IsFirstCycle : BOOL]]></Declaration>
+      <Get Name="Get" Id="{303520b1-ce92-0b1d-082a-f567b1b71952}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="LastCycleExecutionTime" Id="{a985e818-2ea4-0902-2d2c-4dff59779775}">
+      <Declaration><![CDATA[// Time the previous cycle took to complete execution.
+// [get] Returns the last exection time.
+PROPERTY LastCycleExecutionTime : LTIME]]></Declaration>
+      <Get Name="Get" Id="{9428149c-623f-0364-039c-0ef17f2e0ad3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Name" Id="{8d7f312f-7743-06dc-3d03-095784cf3238}">
+      <Declaration><![CDATA[// The name of the task.
+// [get] Returns the task name.
+PROPERTY Name : T_TaskNameString]]></Declaration>
+      <Get Name="Get" Id="{6f89de09-1e58-0d5c-25fd-74f98782babb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="ObjectId" Id="{0aa3f46f-c406-0557-26a4-0053efca50f7}">
+      <Declaration><![CDATA[// The object ID of the task reference, from which the PLC program is called.
+// [get] Returns the object ID.
+PROPERTY ObjectId : OTCID]]></Declaration>
+      <Get Name="Get" Id="{28c9a1b5-710a-0037-1cc6-a0090cbba625}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Priority" Id="{7670559c-597b-0c49-043c-f542f4d7e181}">
+      <Declaration><![CDATA[// The priority of the task.
+// [get] Returns the priority.
+PROPERTY Priority : UINT]]></Declaration>
+      <Get Name="Get" Id="{5bfd8a80-29f6-058d-3133-e6ff045f9168}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="RTTimeLimitExceeded" Id="{5653742a-9945-0542-20a2-26f33b39ee0b}">
+      <Declaration><![CDATA[// Indicates whether the real-time time limit has been exceeded on a mixed core (Windows + real-time on one core).
+// [get] Returns true if the real-time time limit has been exceeded.
+PROPERTY RTTimeLimitExceeded : BOOL]]></Declaration>
+      <Get Name="Get" Id="{48c077df-69bd-00fa-3543-44cc134757bc}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

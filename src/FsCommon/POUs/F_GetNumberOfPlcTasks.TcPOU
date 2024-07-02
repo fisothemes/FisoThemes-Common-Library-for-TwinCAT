@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetNumberOfPlcTasks" Id="{8dac3619-28ef-094c-37c8-ea1d77a553b6}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the number of PLC tasks available in the system.
+FUNCTION F_GetNumberOfPlcTasks : T_Size // The number of PLC tasks.]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetNumberOfPlcTasks := SIZEOF(TwinCAT_SystemInfoVarList._TaskInfo) / SIZEOF(PlcTaskSystemInfo);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

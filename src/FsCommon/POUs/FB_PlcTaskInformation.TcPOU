@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_PlcTaskInformation" Id="{d34eadf6-ab90-05ae-3a4a-66d09ffe82d0}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves PLC Task information.
+// [note] if not explicitly defined, the default task index is the task the function block is instatiated on. 
+{attribute 'enable_dynamic_creation'}
+{attribute 'no_explicit_call' := 'direct call for this function block is not allowed'}
+FUNCTION_BLOCK FINAL FB_PlcTaskInformation IMPLEMENTS I_PlcTaskInformation
+VAR
+	_nTaskIndex : DINT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="AdsPort" Id="{8a378393-5fa1-0c1c-2120-627bd888d6fd}">
+      <Declaration><![CDATA[// Task's ADS Port.
+// [get] Returns the referenced task's ADS port.
+PROPERTY AdsPort : Tc2_System.T_AmsPort]]></Declaration>
+      <Get Name="Get" Id="{c5609cca-d812-0516-3514-cd22df14fb57}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AdsPort := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].AdsPort;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CycleCount" Id="{606fb50b-63ff-0048-2a5f-f428ac78975d}">
+      <Declaration><![CDATA[// The task's cycle counter.
+// [note] This refers to the actual system task and not to the task reference of the PLC project.
+// [get] Returns the task's cycle counter.
+PROPERTY CycleCount : UDINT]]></Declaration>
+      <Get Name="Get" Id="{07085d1f-6c35-0009-37d1-0134da5f6a25}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CycleCount := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].CycleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CycleTime" Id="{32ce03fc-9e1c-008c-125b-034c2b767fe4}">
+      <Declaration><![CDATA[// The cycle time of the task.
+// [get] Returns the cycle time.
+PROPERTY CycleTime : LTIME]]></Declaration>
+      <Get Name="Get" Id="{74f59e60-fcb5-0978-234f-7bbf5ba522ee}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CycleTime := TO_LTIME(TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].CycleTime * 100);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CycleTimeExceeded" Id="{1ec6bc54-7d90-0b68-292c-27dc0be3872b}">
+      <Declaration><![CDATA[// Indicates whether the cycle time has been exceeded.
+// [get] Returns TRUE if the cycle time has been exceeded.
+PROPERTY CycleTimeExceeded : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f07f3c25-f257-07c7-2814-fc73d24522c4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CycleTimeExceeded := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].CycleTimeExceeded;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{6db93bfe-6854-0596-1361-e662b776c73e}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+VAR
+	fbGetCurrentTaskIndex : Tc2_System.GETCURTASKINDEX;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbGetCurrentTaskIndex(Index => THIS^._nTaskIndex);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="HasCallAfterOutputUpdateAttribute" Id="{a756ddea-8ab9-0e8a-1ed0-f540225211a0}">
+      <Declaration><![CDATA[// Indicates if the origin of the current call is declared with the attribute 'TcCallAfterOutputUpdate'.
+// [get] Returns TRUE if current call is declared with the attribute 'TcCallAfterOutputUpdate'.
+PROPERTY HasCallAfterOutputUpdateAttribute : BOOL]]></Declaration>
+      <Get Name="Get" Id="{0e79c0a8-916f-0e4b-3250-292d18ed8645}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HasCallAfterOutputUpdateAttribute := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].InCallAfterOutputUpdate;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Index" Id="{5cf7a19a-f68e-01e7-3a2b-04d52d95e5a4}">
+      <Declaration><![CDATA[// The index of the task.
+// [get] Returns the index.
+// [set] The index of the task to retrieve information from.
+PROPERTY Index : DINT]]></Declaration>
+      <Get Name="Get" Id="{fdddcd25-8bca-0dc0-0eae-0d4804e34446}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Index := THIS^._nTaskIndex;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d829f6a7-51a3-0f6d-2526-67a01b16bbb4}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[THIS^._nTaskIndex := LIMIT(1, Index, F_SizeToDint(F_GetNumberOfPlcTasks()));
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="IsFirstCycle" Id="{6d2dab56-79b0-0189-1c42-5566b3bf2887}">
+      <Declaration><![CDATA[// Indicates if it is the first cycle of the task.
+// [get] Returns TRUE if it is the first cycle.
+PROPERTY IsFirstCycle : BOOL]]></Declaration>
+      <Get Name="Get" Id="{f08221e4-aea8-0aac-1c55-2481a843e324}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsFirstCycle := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].FirstCycle;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LastCycleExecutionTime" Id="{31f57e75-8d6f-0bb7-38e9-979b01f4fe39}">
+      <Declaration><![CDATA[// Time the previous cycle took to complete execution.
+// [get] Returns the last exection time.
+PROPERTY LastCycleExecutionTime : LTIME]]></Declaration>
+      <Get Name="Get" Id="{a857d344-5994-04c5-3480-ef236ba64db5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastCycleExecutionTime := TO_LTIME(TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].LastExecTime * 100);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Name" Id="{a18c1f0c-a7e5-0ac2-185e-e71c96dd403c}">
+      <Declaration><![CDATA[// The name of the task.
+// [get] Returns the task name.
+PROPERTY Name : T_TaskNameString]]></Declaration>
+      <Get Name="Get" Id="{a998ca4d-ea89-05be-2fdc-7ee950909f21}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Name := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].TaskName;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ObjectId" Id="{8cc46eee-8229-016e-2e83-6658635b532c}">
+      <Declaration><![CDATA[// The object ID of the task reference, from which the PLC program is called.
+// [get] Returns the object ID.
+PROPERTY ObjectId : OTCID]]></Declaration>
+      <Get Name="Get" Id="{72b43474-349f-042c-12d9-4bea9f26e862}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ObjectId := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].ObjId;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Priority" Id="{2c545a4f-3316-0a69-2741-91d4e16d922b}">
+      <Declaration><![CDATA[// The priority of the task.
+// [get] Returns the priority.
+PROPERTY Priority : UINT]]></Declaration>
+      <Get Name="Get" Id="{59f08bf7-96f6-07e1-2712-e0272b96e0e7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Priority := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].Priority;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RTTimeLimitExceeded" Id="{6004deec-98d3-082a-172a-3285b148a293}">
+      <Declaration><![CDATA[// Indicates whether the real-time time limit has been exceeded on a mixed core (Windows + real-time on one core).
+// [get] Returns true if the real-time time limit has been exceeded.
+PROPERTY RTTimeLimitExceeded : BOOL]]></Declaration>
+      <Get Name="Get" Id="{81eea262-a5ec-0bf1-167d-ce782f8165de}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RTTimeLimitExceeded := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].RTViolation;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

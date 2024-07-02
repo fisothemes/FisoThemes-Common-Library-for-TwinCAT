@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_PlcTaskCycleChangeDetector" Id="{31dcff30-bfff-03bb-2b15-4c6188c8f519}" SpecialFunc="None">
+    <Declaration><![CDATA[// Detects if the current PLC task cycle has changed.
+// If index of the initialiser less than 1, the task index the object is instatiated on is watched.
+// [init] <Instance Name> : FB_PlcTaskCycleChangeDetector(<Task Index>);
+{attribute 'enable_dynamic_creation'}
+{attribute 'no_explicit_call' := 'direct call for this function block is not allowed'}
+FUNCTION_BLOCK FINAL FB_PlcTaskCycleChangeDetector IMPLEMENTS I_ChangeDetector
+VAR
+	_nTaskIndex 		: DINT	:= 1;
+	_nLastCycleChecked 	: UDINT := GVL_TypeValueLimits.UDINT_MAX; // The last cycle checked for change-in-plc-cycle.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="CurrentCycle" Id="{272d7d70-d52c-035c-2e80-f7b67e0c282b}">
+      <Declaration><![CDATA[// The task's current cycle counter.
+// [note] This refers to the actual system task and not to the task reference of the PLC project.
+// [get] Returns the current task's cycle counter.
+PROPERTY CurrentCycle : UDINT]]></Declaration>
+      <Get Name="Get" Id="{092f2ca1-ad9a-0301-26f4-4b22a9b95389}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CurrentCycle := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].CycleCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{c58a8f96-c1d8-0ef5-0153-e48472f9ff8e}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains 	: BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode 	: BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	nTaskIndex 		: DINT; // Index of task to monitor. 0 or less = Task the object is instatiated at.
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._nTaskIndex := SEL(nTaskIndex > 0,
+						 F_GetCurrentPlcTaskInformation().Index,
+						 LIMIT(1, nTaskIndex, F_SizeToDint(F_GetNumberOfPlcTasks())));]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="HasChanged" Id="{823b1c07-5ff2-0a13-2bc1-f98ecd6fa672}">
+      <Declaration><![CDATA[// Indicates if the value has changed.
+// [get] Returns flag indicating of value has changed.
+PROPERTY HasChanged : BOOL]]></Declaration>
+      <Get Name="Get" Id="{45e10c30-0572-0e9a-0373-cf2354a05205}">
+        <Declaration><![CDATA[VAR
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HasChanged := THIS^.CurrentCycle <> THIS^._nLastCycleChecked;
+THIS^._nLastCycleChecked := THIS^.CurrentCycle;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsFirstCycle" Id="{b5d3d4c6-a75e-0eef-2054-3e56ac5794cd}">
+      <Declaration><![CDATA[// Indicates if it is the first cycle of the task.
+// [get] Returns TRUE if it is the first cycle.
+PROPERTY IsFirstCycle : BOOL]]></Declaration>
+      <Get Name="Get" Id="{aa3dafa4-bbd5-0f00-02e9-2c5dc4cae9aa}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ IsFirstCycle := TwinCAT_SystemInfoVarList._TaskInfo[THIS^._nTaskIndex].FirstCycle;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LastCycleChecked" Id="{d9e10eeb-e1a3-0e41-1a98-890bc4f93964}">
+      <Declaration><![CDATA[// The last cycle checked for change-in-plc-cycle.
+// [get] Returns the last cycle checked.
+PROPERTY LastCycleChecked : UDINT]]></Declaration>
+      <Get Name="Get" Id="{9c5ad418-2730-03f1-1e70-072d6bcdc273}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LastCycleChecked := THIS^._nLastCycleChecked;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TaskIndex" Id="{82f90d42-16df-082c-189e-8c77f536c352}">
+      <Declaration><![CDATA[// The index of the task being monitored.
+// [get] Returns the index.
+PROPERTY TaskIndex : DINT]]></Declaration>
+      <Get Name="Get" Id="{a7378cce-5e3a-00aa-06dd-a161589578f4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TaskIndex := THIS^._nTaskIndex;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
