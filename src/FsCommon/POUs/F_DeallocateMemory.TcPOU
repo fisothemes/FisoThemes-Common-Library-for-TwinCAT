@@ -4,7 +4,7 @@
     <Declaration><![CDATA[// Safely releases a memory pointer. 
 // Ensuring that dynamically allocated memory is properly deallocated,
 // and statically allocated memory pointers are safely nullified to avoid potential memory issues.
-FUNCTION F_DeallocateMemory : BOOL // Indication of whether deallocation was succesful.
+FUNCTION F_DeallocateMemory
 VAR_IN_OUT
 	pAddress : POINTER TO BYTE; // The memory pointer to be released.
 END_VAR]]></Declaration>
@@ -16,9 +16,7 @@ CASE Tc2_System.F_CheckMemoryArea(pAddress, 1) OF
 		__DELETE(pAddress); 
 ELSE
 	pAddress := 0;
-	END_CASE
-	
-F_DeallocateMemory := TRUE;]]></ST>
+	END_CASE]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

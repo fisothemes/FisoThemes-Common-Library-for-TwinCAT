@@ -4,16 +4,17 @@
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'direct call for this program is not allowed'} 
 PROGRAM INTERNAL PLAYGROUND
 VAR
+	bStart 					: BOOL := TRUE;
 	nCpuCycle				: ULINT;
 	eOpSys 					: E_OperatingSystem;
 	eProcArc				: E_ProcessorArchitecture;
 	ipTaskInfo 				: I_PlcTaskInformation;
 	fbTaskInfo 				: FB_PlcTaskInformation;
-	fbTaskCycleChanged		: FB_PlcTaskCycleChangeDetector(1); 
+	fbTaskCycleChanged		: FB_PlcTaskCycleChangeDetector(0); 
 	nHash 					: DWORD;
 	AmsPort 				: Tc2_System.T_AmsPort;
 	CycleTime, LastExecTime : LTIME;
-	i, j, Count, Size 			: T_Size := F_GetNumberOfPlcTasks();
+	i, j, Count, Size 		: T_Size;
 	Str 					: STRING := '123456789';
 	fbGenRand				: FB_RandomNumberGenerator(0);
 	nRand1, nRand2			: LINT;
@@ -21,6 +22,7 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[nHash := F_Hash(ADR(Str), F_PositionToSize(LEN(Str)), 0);
+
 
 nCpuCycle		:= F_GetCpuCycleCounter();
 eProcArc 		:= P_GetSystemInformation.ProcessorArchitecture;
@@ -35,6 +37,11 @@ nRand1 := fbGenRand.NextInt();
 nRand2 := fbGenRand.NextRangedInt(10, -10);
 fRand1 := fbGenRand.NextReal();
 fRand2 := F_SetDecimalPlaces(fbGenRand.NextRangedReal(-5.8, 9.432), 2);
+
+IF NOT F_ResetOnTrue(bStart) THEN RETURN; END_IF
+
+i := SEL(fbTaskCycleChanged.HasChanged, i, i + 1);
+j := SEL(fbTaskCycleChanged.HasChanged, j, j + 1);
 ]]></ST>
     </Implementation>
   </POU>

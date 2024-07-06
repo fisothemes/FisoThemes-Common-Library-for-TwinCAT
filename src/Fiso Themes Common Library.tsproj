@@ -7,7 +7,7 @@
 					<Name>PlcTask</Name>
 				</Task>
 				<Task Id="4" Priority="21" CycleTime="100000" AmsPort="351" AdtTasks="true">
-					<Name>PlcTask1</Name>
+					<Name>PlcTestTask</Name>
 				</Task>
 			</Tasks>
 		</System>

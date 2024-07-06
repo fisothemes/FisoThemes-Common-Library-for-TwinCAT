@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="F_GetCpuCycleCounter" Id="{d8e363d2-9128-0e10-390d-c24593a1d990}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION F_GetCpuCycleCounter : ULINT
+    <Declaration><![CDATA[// Gets the CPU's cycle count.
+// The value us refreshed every 100ns.
+FUNCTION F_GetCpuCycleCounter : ULINT // The current CPU count with in the 100ns refresh rate.
 VAR_STAT
 	fbGetCpuCounter : Tc2_System.GETCPUCOUNTER;
-	arCpuCount 		: ARRAY[0..1] OF DWORD;
-	pCpuCount 		: POINTER TO ULINT := ADR(arCpuCount);
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbGetCpuCounter(cpuCntLoDW => arCpuCount[0], cpuCntHiDW => arCpuCount[1]);
-F_GetCpuCycleCounter := pCpuCount^;]]></ST>
+      <ST><![CDATA[fbGetCpuCounter();
+F_GetCpuCycleCounter := SHL(TO_ULINT(fbGetCpuCounter.cpuCntHiDW), 32) OR fbGetCpuCounter.cpuCntLoDW;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

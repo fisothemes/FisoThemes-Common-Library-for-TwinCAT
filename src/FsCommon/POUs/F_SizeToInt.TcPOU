@@ -7,7 +7,7 @@ VAR_INPUT
 	Size : T_Size; // The input size to be converted.
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[F_SizeToDint := TO_INT(LIMIT(0, Size, TO_UDINT(GVL_TypeValueLimits.INT_MAX)));]]></ST>
+      <ST><![CDATA[F_SizeToInt := TO_INT(LIMIT(0, Size, TO_UDINT(GVL_TypeValueLimits.INT_MAX)));]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -19,7 +19,7 @@
     <Company>FisoThemes</Company>
     <Released>false</Released>
     <Title>FsCommon</Title>
-    <ProjectVersion>0.1.0.0</ProjectVersion>
+    <ProjectVersion>0.2.0.1</ProjectVersion>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{dd9b7bed-6894-42d1-82c5-149be3e6aacd}</Id>
@@ -157,6 +157,9 @@
     <Compile Include="POUs\F_GetInf.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_GetMemorySegment.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_GetNaN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -188,6 +191,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_SizeToPosition.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_SwapMemory.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\P_GetSystemInformation.TcPOU">

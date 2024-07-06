@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_SwapMemory" Id="{e8ff3d8c-5e4c-055c-1800-a7e4a56b1f7a}" SpecialFunc="None">
+    <Declaration><![CDATA[// Swaps the contents of two memory locations.
+FUNCTION F_SwapMemory
+VAR_INPUT
+    pAddress1 	: POINTER TO BYTE; // Pointer to the first memory location.
+    pAddress2 	: POINTER TO BYTE; // Pointer to the second memory location.
+    Size 		: T_Size;          // Size of each memory element (in bytes).
+END_VAR
+VAR
+	i, End 			: T_Position;
+	nTmp 			: __XWORD;
+	pTmpAddress1	: POINTER TO __XWORD := pAddress1;	
+	pTmpAddress2	: POINTER TO __XWORD := pAddress2;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF pAddress1 = pAddress2 OR pAddress1 = 0 OR pAddress2 = 0 THEN RETURN; END_IF
+
+End := TO_LINT(Size / SIZEOF(__XWORD)) - 1;
+FOR i := 0 TO End DO
+	nTmp := pTmpAddress1[i];
+	pTmpAddress1[i] := pTmpAddress2[i];
+	pTmpAddress2[i] := nTmp;
+	END_FOR
+
+End := TO_LINT(Size) - 1;
+FOR i := i TO End DO
+	nTmp := pAddress1[i];
+	pAddress1[i] := pAddress2[i];
+	pAddress2[i] := TO_BYTE(nTmp);
+	END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

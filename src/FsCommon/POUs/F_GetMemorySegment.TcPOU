@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetMemorySegment" Id="{f06020a8-6882-0671-1592-c7ec5b82fcd2}" SpecialFunc="None">
+    <Declaration><![CDATA[//	Retrieves the memory address of a segment of memory.
+FUNCTION F_GetMemorySegment : POINTER TO BYTE // A pointer to the memory location of the specified segment.
+VAR_INPUT
+    pAddress : POINTER TO BYTE; // Starting address of the memory location.
+    Size     : T_Size; // Size of one segment.
+    Index    : T_Position; // Index of the segment.
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetMemorySegment := SEL(pAddress <> 0, 0, pAddress + (Size * F_PositionToSize(Index)));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
