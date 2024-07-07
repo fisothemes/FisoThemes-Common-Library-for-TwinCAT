@@ -34,7 +34,7 @@ UNION
     AsPointerToTimeOfDay	: POINTER TO TIME_OF_DAY;
 	AsPointerToInterface 	: POINTER TO __SYSTEM.IQueryInterface;
 	AsNestedPointer			: POINTER TO U_Pointer;
-	AsPointerToPointer		: PVOID;
+	AsVoidPointer			: PVOID;
 	AsUnsignedInterger		: __UXINT;
 	AsWord					: __XWORD;
 END_UNION
