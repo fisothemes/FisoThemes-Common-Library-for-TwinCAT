@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Refactors>
+  <Renames>
+    <RenamedType>
+      <Type guid="81829602-a114-48b4-b7eb-66e101d12ba1">F_ALLARETRUE_1</Type>
+      <From>F_AllAreTrue_1</From>
+      <To>F_AllAreFalse</To>
+    </RenamedType>
+    <RenamedType>
+      <Type guid="225afdec-fa49-402b-a52f-6ecbb74f4bfb">F_ANYARETRUE_1</Type>
+      <From>F_AnyAreTrue_1</From>
+      <To>F_AnyAreFalse</To>
+    </RenamedType>
+  </Renames>
+</Refactors>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_ULintToPosition" Id="{28112103-e86f-06d1-2531-05a8f6498f71}" SpecialFunc="None">
+    <Declaration><![CDATA[// Converts a ULINT value to a position value, ensuring it falls within the defined limits.
+FUNCTION F_ULintToPosition : T_Position // The position value constrained within the minimum and maximum limits of T_Position.
+VAR_INPUT
+	nValue : ULINT; // The size value to be converted to a position value.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_ULintToPosition := TO_LINT(LIMIT(0, nValue, TO_ULINT(GVL_TypeValueLimits.LINT_MAX)));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

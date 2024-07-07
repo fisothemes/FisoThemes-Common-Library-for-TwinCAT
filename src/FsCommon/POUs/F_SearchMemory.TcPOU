@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_SearchMemory" Id="{08dbfac7-669b-041f-170c-c1e2ca6b91c6}" SpecialFunc="None">
+    <Declaration><![CDATA[// Searches for a specific sequence of bytes in a given memory area.
+FUNCTION F_SearchMemory : POINTER TO BYTE // Pointer to the start of the found sequence, or 0 if not found.
+VAR_INPUT
+    pAddress    : POINTER TO BYTE; // Starting address of the memory area to search.
+    Size 		: T_Size; // Size of the memory area (in bytes).
+    pValue   	: POINTER TO BYTE; // Pointer to the sequence of bytes to search for.
+    ValueSize	: T_Size; // Size of the sequence of bytes (in bytes).
+END_VAR
+VAR_OUTPUT
+	Index		: T_Position := -1; // Index of the start of the found sequence, or -1 if not found.
+END_VAR
+VAR
+    i, j,
+	iEnd, jEnd	: T_Position;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF pAddress = 0 OR pValue = 0 OR ValueSize = 0 THEN RETURN; END_IF
+
+iEnd := F_SizeToPosition(Size) - ValueSize;
+jEnd := F_SizeToPosition(ValueSize) - 1;
+FOR i := 0 TO iEnd DO
+	FOR j := 0 TO jEnd DO
+		IF pAddress[i + j] <> pValue[j] THEN EXIT; END_IF
+		END_FOR
+	IF j = ValueSize THEN F_SearchMemory := ADR(pAddress[i]); Index := j; RETURN; END_IF
+	END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

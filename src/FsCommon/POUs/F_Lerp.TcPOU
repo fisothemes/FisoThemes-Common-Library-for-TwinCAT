@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_Lerp" Id="{8afff2ef-42b5-055b-15b3-074bf2e00bfb}" SpecialFunc="None">
+    <Declaration><![CDATA[// Linearly interpolates between two values based on a given percentage.
+FUNCTION F_Lerp : LREAL // The interpolated value.
+VAR_INPUT
+    fStartValue : LREAL; // The starting value.
+    fEndValue   : LREAL; // The ending value.
+    fPercentage : LREAL; // The interpolation factor (0.0 to 1.0).
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_Lerp := fStartValue + (fEndValue - fStartValue) * fPercentage;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

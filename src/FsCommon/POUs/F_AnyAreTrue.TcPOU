@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_AnyAreTrue" Id="{96c0f73b-a590-0e31-3eec-03b889c2c89e}" SpecialFunc="None">
+    <Declaration><![CDATA[// Checks if any element in a boolean array is true.
+FUNCTION F_AnyAreTrue : BOOL // True if any element in the array is true.
+VAR_IN_OUT
+	arValues : ARRAY[*] OF BOOL; // An array of boolean values to check.
+END_VAR
+VAR
+	i : T_Position;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := LOWER_BOUND(arValues, 1) TO UPPER_BOUND(arValues, 1) DO
+	IF arValues[i] THEN F_AnyAreTrue := TRUE; RETURN; END_IF 
+	END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

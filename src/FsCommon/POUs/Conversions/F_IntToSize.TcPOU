@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_IntToSize" Id="{9aea1426-f665-07fe-0412-bd7b14c10d24}" SpecialFunc="None">
+    <Declaration><![CDATA[// Converts a INT value to a size value, ensuring it falls within the defined limits.
+FUNCTION F_IntToSize : T_Size // The size value constrained within the minimum and maximum limits of T_Size.
+VAR_INPUT
+	nValue : INT; // The INT value to be converted to a size value.
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_IntToSize := TO_UDINT(
+	LIMIT(0, nValue, GVL_TypeValueLimits.INT_MAX));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

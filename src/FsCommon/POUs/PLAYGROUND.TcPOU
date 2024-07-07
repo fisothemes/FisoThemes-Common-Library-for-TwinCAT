@@ -4,6 +4,9 @@
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'direct call for this program is not allowed'} 
 PROGRAM INTERNAL PLAYGROUND
 VAR
+	Str1, Str2				: T_MaxString;
+	pFound 					: POINTER TO STRING;
+	uPointer 				: U_Pointer := (AsPointerToString := ADR(Str1));
 	bStart 					: BOOL := TRUE;
 	nCpuCycle				: ULINT;
 	eOpSys 					: E_OperatingSystem;
@@ -23,7 +26,6 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[nHash := F_Hash(ADR(Str), F_PositionToSize(LEN(Str)), 0);
 
-
 nCpuCycle		:= F_GetCpuCycleCounter();
 eProcArc 		:= P_GetSystemInformation.ProcessorArchitecture;
 eOpSys 			:= P_GetSystemInformation.OperatingSystem;
@@ -37,6 +39,8 @@ nRand1 := fbGenRand.NextInt();
 nRand2 := fbGenRand.NextRangedInt(10, -10);
 fRand1 := fbGenRand.NextReal();
 fRand2 := F_SetDecimalPlaces(fbGenRand.NextRangedReal(-5.8, 9.432), 2);
+
+pFound := F_SearchMemory(ADR(Str1), F_IntToSize(LEN(Str1)), ADR(Str2), F_IntToSize(LEN(Str2)));
 
 IF NOT F_ResetOnTrue(bStart) THEN RETURN; END_IF
 

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="U_Pointer" Id="{977add39-4572-0436-1836-fe081168677a}">
+    <Declaration><![CDATA[// Union to handle various types of pointers in a flexible way.
+// This union allows a pointer to be treated as different types, making it versatile for various memory operations.
+TYPE U_Pointer :
+UNION
+	AsPointerToBool			: POINTER TO BOOL;
+    AsPointerToByte			: POINTER TO BYTE;
+    AsPointerToWord			: POINTER TO WORD;
+    AsPointerToDWord		: POINTER TO DWORD;
+    AsPointerToLWord		: POINTER TO LWORD;
+	AsPointerToXWord		: POINTER TO __XWORD;
+    AsPointerToSint			: POINTER TO SINT;
+    AsPointerToInt			: POINTER TO INT;
+    AsPointerToDint			: POINTER TO DINT;
+    AsPointerToLint			: POINTER TO LINT;
+	AsPointerToXint			: POINTER TO __XINT;
+    AsPointerToUSint		: POINTER TO USINT;
+    AsPointerToUInt			: POINTER TO UINT;
+    AsPointerToUDint		: POINTER TO UDINT;
+    AsPointerToULint		: POINTER TO ULINT;
+	AsPointerToUXint		: POINTER TO __UXINT;
+    AsPointerToReal			: POINTER TO REAL;
+    AsPointerToLReal		: POINTER TO LREAL;
+	AsPointerToString		: POINTER TO STRING;
+    AsPointerToMaxString	: POINTER TO Tc2_System.T_MaxString;
+    AsPointerToWString		: POINTER TO WSTRING;
+	AsPointerToMaxWString	: POINTER TO T_MaxWString;
+    AsPointerToTime			: POINTER TO TIME;
+	AsPointerToLTime 		: POINTER TO LTIME;
+    AsPointerToDate			: POINTER TO DATE;
+    AsPointerToDateAndTime	: POINTER TO DATE_AND_TIME;
+    AsPointerToTimeOfDay	: POINTER TO TIME_OF_DAY;
+	AsPointerToInterface 	: POINTER TO __SYSTEM.IQueryInterface;
+	AsNestedPointer			: POINTER TO U_Pointer;
+	AsPointerToPointer		: PVOID;
+	AsUnsignedInterger		: __UXINT;
+	AsWord					: __XWORD;
+END_UNION
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>
