@@ -37,7 +37,10 @@ VAR_INPUT
 	nTaskIndex 		: DINT; // Index of task to monitor. 0 or less = Task the object is instatiated at.
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._nTaskIndex := SEL(nTaskIndex > 0,
+        <ST><![CDATA[// Return if online change.
+IF bInCopyCode THEN RETURN; END_IF
+
+THIS^._nTaskIndex := SEL(nTaskIndex > 0,
 						 F_GetCurrentPlcTaskInformation().Index,
 						 LIMIT(1, nTaskIndex, F_SizeToDint(F_GetNumberOfPlcTasks())));]]></ST>
       </Implementation>

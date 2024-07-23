@@ -1,43 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="U_Pointer" Id="{977add39-4572-0436-1836-fe081168677a}">
-    <Declaration><![CDATA[// Union to handle various types of pointers in a flexible way.
-// This union allows a pointer to be treated as different types, making it versatile for various memory operations.
+    <Declaration><![CDATA[// U_Pointer is a union type that can represent various pointer types.
+// This type is useful for handling different kinds of pointers in a unified manner,
+// allowing easy access and manipulation of different data types through pointers.
 TYPE U_Pointer :
 UNION
-	AsPointerToBool			: POINTER TO BOOL;
-    AsPointerToByte			: POINTER TO BYTE;
-    AsPointerToWord			: POINTER TO WORD;
-    AsPointerToDWord		: POINTER TO DWORD;
-    AsPointerToLWord		: POINTER TO LWORD;
-	AsPointerToXWord		: POINTER TO __XWORD;
-    AsPointerToSint			: POINTER TO SINT;
-    AsPointerToInt			: POINTER TO INT;
-    AsPointerToDint			: POINTER TO DINT;
-    AsPointerToLint			: POINTER TO LINT;
-	AsPointerToXint			: POINTER TO __XINT;
-    AsPointerToUSint		: POINTER TO USINT;
-    AsPointerToUInt			: POINTER TO UINT;
-    AsPointerToUDint		: POINTER TO UDINT;
-    AsPointerToULint		: POINTER TO ULINT;
-	AsPointerToUXint		: POINTER TO __UXINT;
-    AsPointerToReal			: POINTER TO REAL;
-    AsPointerToLReal		: POINTER TO LREAL;
-	AsPointerToString		: POINTER TO STRING;
-    AsPointerToMaxString	: POINTER TO Tc2_System.T_MaxString;
-    AsPointerToWString		: POINTER TO WSTRING;
-	AsPointerToMaxWString	: POINTER TO T_MaxWString;
-    AsPointerToTime			: POINTER TO TIME;
-	AsPointerToLTime 		: POINTER TO LTIME;
-    AsPointerToDate			: POINTER TO DATE;
-    AsPointerToDateAndTime	: POINTER TO DATE_AND_TIME;
-    AsPointerToTimeOfDay	: POINTER TO TIME_OF_DAY;
-	AsPointerToInterface 	: POINTER TO __SYSTEM.IQueryInterface;
-	AsNestedPointer			: POINTER TO U_Pointer;
-	AsVoidPointer			: PVOID;
-	AsUnsignedInterger		: __UXINT;
-	AsWord					: __XWORD;
+    pBool           : POINTER TO BOOL;                 // Pointer to a Boolean value.
+    pByte           : POINTER TO BYTE;                 // Pointer to an 8-bit unsigned integer.
+    pWord           : POINTER TO WORD;                 // Pointer to a 16-bit unsigned integer.
+    pDWord          : POINTER TO DWORD;                // Pointer to a 32-bit unsigned integer.
+    pLWord          : POINTER TO LWORD;                // Pointer to a 64-bit unsigned integer.
+    pXWord          : POINTER TO __XWORD;              // Pointer to a CPU register size integer (platform-dependent).
+    pSInt           : POINTER TO SINT;                 // Pointer to an 8-bit signed integer.
+    pInt            : POINTER TO INT;                  // Pointer to a 16-bit signed integer.
+    pDInt           : POINTER TO DINT;                 // Pointer to a 32-bit signed integer.
+    pLInt           : POINTER TO LINT;                 // Pointer to a 64-bit signed integer.
+    pXInt           : POINTER TO __XINT;               // Pointer to a CPU register size signed integer (platform-dependent).
+    pUSInt          : POINTER TO USINT;                // Pointer to an 8-bit unsigned integer.
+    pUInt           : POINTER TO UINT;                 // Pointer to a 16-bit unsigned integer.
+    pUDInt          : POINTER TO UDINT;                // Pointer to a 32-bit unsigned integer.
+    pULInt          : POINTER TO ULINT;                // Pointer to a 64-bit unsigned integer.
+    pUXInt          : POINTER TO __UXINT;              // Pointer to a CPU register size unsigned integer (platform-dependent).
+    pReal           : POINTER TO REAL;                 // Pointer to a 32-bit floating point.
+    pLReal          : POINTER TO LREAL;                // Pointer to a 64-bit floating point.
+    pString         : POINTER TO STRING;               // Pointer to a string.
+    pMaxString      : POINTER TO Tc2_System.T_MaxString; // Pointer to a max length string.
+    pWString        : POINTER TO WSTRING;              // Pointer to a wide string.
+    pMaxWString     : POINTER TO T_MaxWString;         // Pointer to a max length wide string.
+    pTime           : POINTER TO TIME;                 // Pointer to a duration in milliseconds.
+    pLTime          : POINTER TO LTIME;                // Pointer to a duration in nanoseconds.
+    pDate           : POINTER TO DATE;                 // Pointer to a date.
+    pDateAndTime    : POINTER TO DATE_AND_TIME;        // Pointer to a combined date and time.
+    pTimeOfDay      : POINTER TO TIME_OF_DAY;          // Pointer to a time of day.
+    pInterface      : POINTER TO __SYSTEM.IQueryInterface; // Pointer to an interface.
+    pNested         : POINTER TO U_Pointer;            // Pointer to another U_Pointer.
+    pVoid           : PVOID;                           // Generic pointer to any type.
+    nSignedInteger  : __XINT;                          // CPU register size signed integer.
+    nUnsignedInteger: __UXINT;                         // CPU register size unsigned integer.
+    nWord           : __XWORD;                         // CPU register size integer (platform-dependent).
 END_UNION
-END_TYPE]]></Declaration>
+END_TYPE
+]]></Declaration>
   </DUT>
 </TcPlcObject>

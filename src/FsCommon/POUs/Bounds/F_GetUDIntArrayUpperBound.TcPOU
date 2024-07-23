@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetUDIntArrayUpperBound" Id="{5f90ba63-48bc-0d26-2d9e-1585392552e0}" SpecialFunc="None">
+    <Declaration><![CDATA[// Gets the upper bound index of the array of specified type.
+FUNCTION F_GetUDIntArrayUpperBound : T_Position // The upper bound index of the specified array.
+VAR_IN_OUT
+	arArray : ARRAY[*] OF UDINT; // The array to query.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetUDIntArrayUpperBound := UPPER_BOUND(arArray, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetDWordArrayLowerBound" Id="{a5018eeb-1563-01d1-0f99-d23eee809113}" SpecialFunc="None">
+    <Declaration><![CDATA[// Gets the lower bound index of the array of specified type.
+FUNCTION F_GetDWordArrayLowerBound : T_Position // The lower bound index of the specified array.
+VAR_IN_OUT
+	arArray : ARRAY[*] OF DWORD; // The array to query.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetDWordArrayLowerBound := LOWER_BOUND(arArray, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_TcComIecApplicationInfo" Id="{e7fc4ce5-4c3f-0c4f-30ac-dc4e66bb9afa}" SpecialFunc="None">
+    <Declaration><![CDATA[// Manages the ITcIecApplicationInfo TcCOM Interface.
+{attribute 'enable_dynamic_creation'}
+{attribute 'no_assign'}
+{attribute 'no_explicit_call' := 'direct call for this function block is not allowed'} 
+FUNCTION_BLOCK FINAL FB_TcComIecApplicationInfo
+VAR
+	_ipIecApplicationInformation 	: ITcIecApplicationInfo;
+	_hIecApplicationInformation 	: HRESULT := Tc3_Module.GVL.E_FAIL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_exit" Id="{773c3ba9-7b80-006d-2b99-134edc6d3bb1}">
+      <Declaration><![CDATA[{attribute 'hide'}
+METHOD FB_exit : BOOL
+VAR_INPUT
+	bInCopyCode : BOOL; // if TRUE, the exit method is called for exiting an instance that is copied afterwards (online change).
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Return if online change.
+IF bInCopyCode THEN RETURN; END_IF
+
+// Safe release of ITcIecApplicationInfo.
+Tc3_Module.FW_SafeRelease(ADR(THIS^._ipIecApplicationInformation));
+THIS^._hIecApplicationInformation := Tc3_Module.GVL.E_FAIL;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetInterface" Id="{3684b180-7124-0f4d-095c-83eed67bbcdc}">
+      <Declaration><![CDATA[// Acquires ITcIecApplicationInfo TcCOM interface.
+METHOD GetInterface : BOOL // TRUE if the TcCOM interface was successfully acquired.
+VAR_IN_OUT
+	ipTcComInterface : ITcIecApplicationInfo; // Interface to store acquired TcCOM interface.
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Check if instance already exists. 
+// Try to get it of it doesn't.
+IF Tc3_Module.FAILED(THIS^._hIecApplicationInformation) THEN
+	THIS^._hIecApplicationInformation := Tc3_Module.FW_ObjMgr_GetObjectInstance(
+		TwinCAT_SystemInfoVarList._AppInfo.ObjId, 
+		TC_GLOBAL_IID_LIST.IID_ITcIecApplicationInfo, 
+		ADR(THIS^._ipIecApplicationInformation));
+	END_IF
+
+GetInterface 	 := Tc3_Module.SUCCEEDED(THIS^._hIecApplicationInformation);
+ipTcComInterface := THIS^._ipIecApplicationInformation;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

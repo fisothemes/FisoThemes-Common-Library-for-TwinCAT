@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetDWordArrayUpperBound" Id="{fc3a7c10-fec0-0a3d-3fa3-178d10961522}" SpecialFunc="None">
+    <Declaration><![CDATA[// Gets the upper bound index of the array of specified type.
+FUNCTION F_GetDWordArrayUpperBound : T_Position // The upper bound index of the specified array.
+VAR_IN_OUT
+	arArray : ARRAY[*] OF DWORD; // The array to query.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetDWordArrayUpperBound := UPPER_BOUND(arArray, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

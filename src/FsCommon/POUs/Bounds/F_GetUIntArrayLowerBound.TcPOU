@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetUIntArrayLowerBound" Id="{55f02148-84cf-0e22-2bea-d55aaf062e6f}" SpecialFunc="None">
+    <Declaration><![CDATA[// Gets the lower bound index of the array of specified type.
+FUNCTION F_GetUIntArrayLowerBound : T_Position // The lower bound index of the specified array.
+VAR_IN_OUT
+	arArray : ARRAY[*] OF UINT; // The array to query.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetUIntArrayLowerBound := LOWER_BOUND(arArray, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

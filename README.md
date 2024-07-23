@@ -28,13 +28,11 @@ VAR
     pDynamicMemory : POINTER TO BYTE;
 END_VAR
 
-// Allocate memory
+// Allocate 100 bytes of memory
 pDynamicMemory := F_AllocateMemory(100);
 
 // Checks if the memory is in stack or heap and then deallocates memory
-IF pDynamicMemory <> 0 THEN
-    F_DeallocateMemory(pDynamicMemory);
-    END_IF
+F_DeallocateMemory(pDynamicMemory);
 ```
 
 ### Example: Value Change Detection
@@ -63,7 +61,6 @@ VAR
     tCycleTime,
     tLastExecTime   : LTIME;
 END_VAR
-
 
 // Get the cycle count of the current task
 nCycleCount     := F_GetCurrentPlcTaskInformation().CycleCount;
@@ -122,6 +119,37 @@ END_VAR
 
 fRoundedValue := F_SetDecimalPlaces(fOriginalValue, nDecimalPlaces);
 // fRoundedValue will be 123.46
+```
+
+### Example: Get the name and type of the variable as a string
+```js
+VAR
+    sVarName,
+    sTypeName,
+    sTypeNameByPath : STRING;
+    stVariable      : ST_Variable;
+END_VAR
+
+// Output : 'stVariable'.
+sVarName := F_ExtractVariableNameFromPath( F_GetVariablePath(stVariable) );
+// Output : 'ST_Variable'.
+sTypeName := F_GetTypeName(stVariable);
+// Output : 'ST_Variable'.
+sTypeNameByPath := 
+    F_GetTypeNameByPath(
+        F_GetVariablePathByAddress(ADR(stVariable), SIZEOF(stVariable)) );
+```
+
+### Example: Functions to get array bounds of common types
+```js
+VAR
+    arValues : ARRAY[-22..GVL_TypeValueLimits.SINT_MAX] OF LREAL;
+    nLower,
+    nUpper   : T_Position;
+END_VAR
+
+nLower := F_GetLRealArrayLowerBound(arValues);
+nUpper := F_GetLRealArrayUpperBound(arValues);
 ```
 
 ## Developer Notes

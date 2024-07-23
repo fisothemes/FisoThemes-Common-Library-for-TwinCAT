@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetTimeArrayUpperBound" Id="{387518c3-292d-084a-3cb2-d3098494a378}" SpecialFunc="None">
+    <Declaration><![CDATA[// Gets the upper bound index of the array of specified type.
+FUNCTION F_GetTimeArrayUpperBound : T_Position // The upper bound index of the specified array.
+VAR_IN_OUT
+	arArray : ARRAY[*] OF TIME; // The array to query.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetTimeArrayUpperBound := UPPER_BOUND(arArray, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

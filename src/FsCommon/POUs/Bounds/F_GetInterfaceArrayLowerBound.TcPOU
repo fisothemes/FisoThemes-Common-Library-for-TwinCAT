@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetInterfaceArrayLowerBound" Id="{3146c2fa-76c4-0127-1927-b73370a46120}" SpecialFunc="None">
+    <Declaration><![CDATA[// Gets the lower bound index of the array of specified type.
+FUNCTION F_GetInterfaceArrayLowerBound : T_Position // The lower bound index of the specified array.
+VAR_IN_OUT
+	arArray : ARRAY[*] OF __SYSTEM.IQueryInterface; // The array to query.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetInterfaceArrayLowerBound := LOWER_BOUND(arArray, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

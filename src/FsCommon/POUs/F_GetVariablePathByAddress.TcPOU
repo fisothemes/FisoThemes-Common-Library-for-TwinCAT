@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetVariablePathByAddress" Id="{652cf853-cf76-0f12-1b61-e75fa4aa0ade}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves path of a variable using its memory address and size.
+// [note] Variables allocated in dynamic memory are not supported.
+{warning disable C0394}
+FUNCTION F_GetVariablePathByAddress : Tc2_System.T_MaxString // The path of the variable.
+VAR_INPUT CONSTANT
+	pAddress 	: POINTER TO BYTE; // Memory address pointer of variable.
+	Size 		: T_Size; // Size of variable (in bytes).
+END_VAR
+VAR_STAT
+	nTmp : UDINT := SIZEOF(F_GetVariablePathByAddress);
+END_VAR
+VAR
+	ipInterface : ITcIecApplicationInfo;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Tc2_System.F_CheckMemoryArea(pAddress, 1) OF
+	Tc2_System.E_TcMemoryArea.Dynamic: F_GetVariablePathByAddress := '<dynamic>';
+	Tc2_System.E_TcMemoryArea.Unknown: F_GetVariablePathByAddress := '<unknown>';
+ELSE
+	IF NOT F_TcComIecApplicationInfo().GetInterface(ipInterface) THEN RETURN; END_IF
+	ipInterface.GetSymbolNameByAddress(
+		Size, pAddress, nTmp, ADR(F_GetVariablePathByAddress));
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

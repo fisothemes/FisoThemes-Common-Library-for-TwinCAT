@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="U_Primitive" Id="{f2c2141b-dc45-0bf9-28af-8f5bac3b4c79}">
+    <Declaration><![CDATA[// U_Primitive is a union type that can represent various primitive data types.
+// This type is useful for handling different kinds of data in a unified manner,
+// allowing easy access and manipulation of basic data types and pointers.
+TYPE U_Primitive :
+UNION
+    bBool           : BOOL;                  // Boolean value.
+    nByte           : BYTE;                  // 8-bit unsigned integer.
+    nWord           : WORD;                  // 16-bit unsigned integer.
+    nDWord          : DWORD;                 // 32-bit unsigned integer.
+    nLWord          : LWORD;                 // 64-bit unsigned integer.
+    nXWord          : __XWORD;               // CPU register size integer (platform-dependent).
+    nSInt           : SINT;                  // 8-bit signed integer.
+    nInt            : INT;                   // 16-bit signed integer.
+    nDInt           : DINT;                  // 32-bit signed integer.
+    nLInt           : LINT;                  // 64-bit signed integer.
+    nXInt           : __XINT;                // CPU register size signed integer (platform-dependent).
+    nUSInt          : USINT;                 // 8-bit unsigned integer.
+    nUInt           : UINT;                  // 16-bit unsigned integer.
+    nUDInt          : UDINT;                 // 32-bit unsigned integer.
+    nULInt          : ULINT;                 // 64-bit unsigned integer.
+    nUXInt          : __UXINT;               // CPU register size unsigned integer (platform-dependent).
+    fReal           : REAL;                  // 32-bit floating point.
+    fLReal          : LREAL;                 // 64-bit floating point.
+    tTime           : TIME;                  // Duration in milliseconds.
+    tLTime          : LTIME;                 // Duration in nanoseconds.
+    dDate           : DATE;                  // Date.
+    dtDateAndTime   : DATE_AND_TIME;         // Combined date and time.
+    todTimeOfDay    : TIME_OF_DAY;           // Time of day.
+    ipInterface     : __SYSTEM.IQueryInterface; // Interface pointer.
+    uPointer        : U_Pointer;             // Various pointer types.
+    pVoidPointer    : PVOID;                 // Generic pointer to any type.
+    arBytes         : ARRAY[0..7] OF BYTE;   // Array of bytes (8 bytes).
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

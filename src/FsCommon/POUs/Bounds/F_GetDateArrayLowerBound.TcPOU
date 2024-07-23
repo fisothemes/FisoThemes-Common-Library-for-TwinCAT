@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetDateArrayLowerBound" Id="{6a57a4a8-a709-08c8-33ad-7870ccf6e6cd}" SpecialFunc="None">
+    <Declaration><![CDATA[// Gets the lower bound index of the array of specified type.
+FUNCTION F_GetDateArrayLowerBound : T_Position // The lower bound index of the specified array.
+VAR_IN_OUT
+	arArray : ARRAY[*] OF DATE; // The array to query.
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetDateArrayLowerBound := LOWER_BOUND(arArray, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

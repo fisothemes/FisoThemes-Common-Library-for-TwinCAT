@@ -27,7 +27,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^._nSeed := nSeed;]]></ST>
+        <ST><![CDATA[// Return if online change.
+IF bInCopyCode THEN RETURN; END_IF
+
+THIS^._nSeed := nSeed;]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetSystemEntropy" Id="{59ce7d84-772f-0a49-1416-364cf94b7c6f}" FolderPath="Internal\">

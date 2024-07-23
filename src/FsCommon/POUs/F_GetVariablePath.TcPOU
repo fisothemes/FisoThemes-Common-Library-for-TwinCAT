@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetVariablePath" Id="{67eac14e-6598-0873-275f-7fc1e9997f9d}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves path of the specified variable.
+// [note] Variables allocated in dynamic memory are not supported.
+{warning disable C0394}
+FUNCTION F_GetVariablePath : Tc2_System.T_MaxString // The path of the variable.
+VAR_INPUT
+	 Variable : ANY; // The variable whose path is to be determined.
+END_VAR
+VAR_STAT
+	nTmp : UDINT := SIZEOF(F_GetVariablePath);
+END_VAR
+VAR
+	ipInterface : ITcIecApplicationInfo;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Tc2_System.F_CheckMemoryArea(Variable.pValue, 1) OF
+	Tc2_System.E_TcMemoryArea.Dynamic: F_GetVariablePath := '<dynamic>';
+	Tc2_System.E_TcMemoryArea.Unknown: F_GetVariablePath := '<unknown>';
+ELSE
+	IF NOT F_TcComIecApplicationInfo().GetInterface(ipInterface) THEN RETURN; END_IF
+	ipInterface.GetSymbolNameByAddress(
+		TO_UDINT(Variable.diSize), Variable.pValue, nTmp, ADR(F_GetVariablePath));
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

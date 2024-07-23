@@ -76,7 +76,10 @@ VAR
 	fbGetCurrentTaskIndex : Tc2_System.GETCURTASKINDEX;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbGetCurrentTaskIndex(Index => THIS^._nTaskIndex);]]></ST>
+        <ST><![CDATA[// Return if online change.
+IF bInCopyCode THEN RETURN; END_IF
+
+fbGetCurrentTaskIndex(Index => THIS^._nTaskIndex);]]></ST>
       </Implementation>
     </Method>
     <Property Name="HasCallAfterOutputUpdateAttribute" Id="{a756ddea-8ab9-0e8a-1ed0-f540225211a0}">

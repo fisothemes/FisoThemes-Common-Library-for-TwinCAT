@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetTypeName" Id="{22946d19-282a-0b67-09d5-00cdb626f6fc}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the datatype of a given variable as a string.
+// [note] Variables allocated in dynamic memory are not supported.
+{warning disable C0394}
+FUNCTION F_GetTypeName : STRING // The datatype name of the variable as a string.
+VAR_INPUT
+    Variable : ANY; // The variable whose datatype is to be determined.
+END_VAR
+VAR_STAT
+	nTmp : UDINT := SIZEOF(F_GetTypeName);
+END_VAR
+VAR
+	ipInterface : ITcIecApplicationInfo;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Tc2_System.F_CheckMemoryArea(Variable.pValue, 1) OF
+	Tc2_System.E_TcMemoryArea.Dynamic: F_GetTypeName := '<dynamic>';
+	Tc2_System.E_TcMemoryArea.Unknown: F_GetTypeName := '<unknown>';
+ELSE
+	IF NOT F_TcComIecApplicationInfo().GetInterface(ipInterface) THEN RETURN; END_IF
+	ipInterface.GetDatatypeNameByAddress(
+		TO_UDINT(Variable.diSize), Variable.pValue, nTmp, ADR(F_GetTypeName));
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

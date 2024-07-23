@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_ExtractVariableNameFromPath" Id="{840fb9ac-50b4-0579-120a-ff50805783d8}" SpecialFunc="None">
+    <Declaration><![CDATA[// Extracts the variable name from a given variable/symbol path.
+// [example] 'MAIN.bVar' -> 'bVar'
+FUNCTION F_ExtractVariableNameFromPath : STRING // The variable name.
+VAR_INPUT CONSTANT
+	Path : Tc2_System.T_MaxString; // Variable/Symbol path. 
+END_VAR
+VAR
+	pCursor : POINTER TO BYTE;
+	pName : POINTER TO STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[pCursor := ADR(Path);
+
+REPEAT
+	CASE pCursor^ OF
+		9..11, 13: RETURN;
+		46: pName := pCursor + 1;
+		END_CASE
+	pCursor := pCursor + 1;
+UNTIL	
+	pCursor^ = 0
+	END_REPEAT
+	
+F_ExtractVariableNameFromPath := SEL(pName <> 0, '', pName^);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

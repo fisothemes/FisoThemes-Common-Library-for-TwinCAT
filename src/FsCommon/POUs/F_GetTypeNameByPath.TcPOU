@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetTypeNameByPath" Id="{b23ad071-7f01-0041-232d-22e897ba753e}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the datatype of a variable as a string given its path.
+{warning disable C0394}
+FUNCTION F_GetTypeNameByPath : STRING // The datatype name of the variable as a string.
+VAR_INPUT
+	// Variable/Symbol path as string.
+	// [example] 'MAIN.bVar'.
+	Path : Tc2_System.T_MaxString; 
+END_VAR
+VAR_STAT
+	nTmp : UDINT := SIZEOF(F_GetTypeNameByPath);
+END_VAR 
+VAR
+	ipInterface : ITcIecApplicationInfo;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT F_TcComIecApplicationInfo().GetInterface(ipInterface) THEN RETURN; END_IF
+
+ipInterface.GetSymbolDatatype(Path, nTmp, ADR(F_GetTypeNameByPath));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

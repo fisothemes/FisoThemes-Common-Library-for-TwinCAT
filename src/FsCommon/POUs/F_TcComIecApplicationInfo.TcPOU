@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_TcComIecApplicationInfo" Id="{efa247a7-f9e5-0dff-3cf5-7868353e6f4f}" SpecialFunc="None">
+    <Declaration><![CDATA[// Provides a reference to a single instance of the FB_TcComIecApplicationInfo function block.
+// This function ensures that all parts of the program access the same instance of FB_TcComIecApplicationInfo,
+// which can be useful for centralized access to the ITcIecApplicationInfo TcCOM object, resource management, and maintaining consistency.
+FUNCTION F_TcComIecApplicationInfo : REFERENCE TO FB_TcComIecApplicationInfo // A reference to an instance of the FB_TcComIecApplicationInfo.
+VAR_STAT
+	fbTcComIecAppInfo : FB_TcComIecApplicationInfo;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_TcComIecApplicationInfo REF= fbTcComIecAppInfo; ]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

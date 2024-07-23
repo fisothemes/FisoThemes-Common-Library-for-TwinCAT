@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_ArrayIterator" Id="{2f0e7caf-244f-0e42-2c96-eeb1f6d47bee}">
+    <Declaration><![CDATA[// Struct for iterating over an array, encapsulating the starting and ending indices.
+TYPE ST_ArrayIterator :
+STRUCT
+    Index   : T_Position := 0; // The current index for the loop, initialised to 0.
+    End     : T_Position := -1; // The ending index for the loop, initialised to -1 indicating uninitialised.
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

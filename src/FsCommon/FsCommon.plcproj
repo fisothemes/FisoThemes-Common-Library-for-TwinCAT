@@ -19,7 +19,7 @@
     <Company>FisoThemes</Company>
     <Released>false</Released>
     <Title>FsCommon</Title>
-    <ProjectVersion>0.3.1.3</ProjectVersion>
+    <ProjectVersion>0.4.0.4</ProjectVersion>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{dd9b7bed-6894-42d1-82c5-149be3e6aacd}</Id>
@@ -49,6 +49,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\E_ProcessorArchitecture.TcTLEO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_ArrayIterator.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\T_ArrayIterator.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\U_Primitive.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\T_Char.TcDUT">
@@ -133,6 +142,180 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Bounds\F_GetBoolArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetByteArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDateAndTimeArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDateArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDWordArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetInterfaceArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetInterfaceArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLRealArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLTimeArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLWordArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetMaxStringArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetMaxStringArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetMaxWStringArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetMaxWStringArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetPointerArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetRealArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetSIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetStringArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetTimeArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetTimeOfDayArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUDIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetULIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUSIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUXIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetWordArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetWStringArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetStringArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetPointerArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetTimeOfDayArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDateAndTimeArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDateArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetTimeArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetRealArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLRealArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLTimeArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUDIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetULIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUXIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUSIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetUIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetWStringArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetXIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetSIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetByteArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetBoolArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetLWordArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetIntArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetXIntArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetXWordArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetWordArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetDWordArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetXWordArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Conversions\F_DintToSize.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -178,6 +361,9 @@
     <Compile Include="POUs\F_AnyAreFalse.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_ExtractVariableNameFromPath.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_GetAddressMemoryArea.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -205,6 +391,12 @@
     <Compile Include="POUs\F_GetNumberOfPlcTasks.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_GetVariablePathByAddress.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_GetVariablePath.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_Hash.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -224,6 +416,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_SwapMemory.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_TcComIecApplicationInfo.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_GetTypeNameByAddress.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_GetTypeName.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_GetTypeNameByPath.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_TcComIecApplicationInfo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\P_GetSystemInformation.TcPOU">
@@ -256,6 +463,7 @@
     <Folder Include="ITFs\Markers" />
     <Folder Include="PARAMs" />
     <Folder Include="POUs\Conversions" />
+    <Folder Include="POUs\Bounds" />
     <Folder Include="Project Information" />
     <Folder Include="UMLs" />
     <Folder Include="Version" />

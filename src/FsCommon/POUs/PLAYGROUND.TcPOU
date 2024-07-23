@@ -4,9 +4,10 @@
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'direct call for this program is not allowed'} 
 PROGRAM INTERNAL PLAYGROUND
 VAR
+	sTypeName,
 	Str1, Str2				: T_MaxString;
 	pFound 					: POINTER TO STRING;
-	uPointer 				: U_Pointer := (AsPointerToString := ADR(Str1));
+	uPointer 				: U_Pointer := (pString := ADR(Str1));
 	bStart 					: BOOL := TRUE;
 	nCpuCycle				: ULINT;
 	eOpSys 					: E_OperatingSystem;
@@ -24,8 +25,8 @@ VAR
 	fRand1, fRand2			: LREAL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[nHash := F_Hash(ADR(Str), F_PositionToSize(LEN(Str)), 0);
-
+      <ST><![CDATA[sTypeName := F_GetTypeName(pFound);
+nHash := F_Hash(ADR(Str), F_PositionToSize(LEN(Str)), 0);
 nCpuCycle		:= F_GetCpuCycleCounter();
 eProcArc 		:= P_GetSystemInformation.ProcessorArchitecture;
 eOpSys 			:= P_GetSystemInformation.OperatingSystem;

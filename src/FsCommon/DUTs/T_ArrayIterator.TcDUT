@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_ArrayIterator" Id="{207c955e-dbdb-0288-3eb0-6311a20e5525}">
+    <Declaration><![CDATA[// Type alias for an array iterator.
+TYPE T_ArrayIterator : ST_ArrayIterator; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
