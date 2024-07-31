@@ -108,7 +108,7 @@ IF fbTaskCycleChanged.HasChanged THEN
 END_METHOD
 ```
 
-### Example: Setting Decimal Places
+### Example: Setting Decimal Places and Rounding.
 
 ```js
 VAR
@@ -117,7 +117,7 @@ VAR
     nDecimalPlaces  : USINT := 2;
 END_VAR
 
-fRoundedValue := F_SetDecimalPlaces(fOriginalValue, nDecimalPlaces);
+fRoundedValue := F_RoundToDecimalPlaces(fOriginalValue, nDecimalPlaces);
 // fRoundedValue will be 123.46
 ```
 
