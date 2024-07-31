@@ -19,7 +19,7 @@
     <Company>FisoThemes</Company>
     <Released>false</Released>
     <Title>FsCommon</Title>
-    <ProjectVersion>0.4.0.4</ProjectVersion>
+    <ProjectVersion>0.4.1.5</ProjectVersion>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{dd9b7bed-6894-42d1-82c5-149be3e6aacd}</Id>
@@ -433,6 +433,9 @@
     <Compile Include="POUs\F_TcComIecApplicationInfo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_RoundToDecimalPlaces.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\P_GetSystemInformation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -474,6 +477,10 @@
     <PlaceholderReference Include="SysTarget">
       <DefaultResolution>SysTarget, * (System)</DefaultResolution>
       <Namespace>SysTarget</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Math">
+      <DefaultResolution>Tc2_Math, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Math</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>

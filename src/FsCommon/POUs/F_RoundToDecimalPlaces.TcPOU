@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_RoundToDecimalPlaces" Id="{a0676f7a-cc6d-040b-104f-b76aa62aec66}" SpecialFunc="None">
+    <Declaration><![CDATA[// Rounds a given floating-point number to a specified number of decimal places.
+FUNCTION F_RoundToDecimalPlaces : LREAL // The rounded floating-point value with the specified number of decimal places.
+VAR_INPUT
+	fValue 			: LREAL; // The floating-point value to be rounded.
+	nDecimalPlaces 	: USINT; // The number of decimal places to round to.
+END_VAR
+VAR
+	fMultiplier, 
+	fTrunc 			: LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fMultiplier := EXPT(10, nDecimalPlaces);
+F_RoundToDecimalPlaces := fValue * fMultiplier;
+fTrunc := Tc2_Math.LTRUNC(F_RoundToDecimalPlaces);
+
+F_RoundToDecimalPlaces := 
+	(fTrunc + SEL(F_RoundToDecimalPlaces - fTrunc >= 0.5, 0, 1)) / fMultiplier;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

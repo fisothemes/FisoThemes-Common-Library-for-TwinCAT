@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Refactors>
+  <Renames>
+    <RenamedType>
+      <Type guid="a5d096bc-116d-4ffa-b6e3-f0cecfb1af1b">F_ROUNDTODECIMAL</Type>
+      <From>HgF_RoundToDecimal</From>
+      <To>F_RoundToDecimalPlaces</To>
+    </RenamedType>
+  </Renames>
+</Refactors>
