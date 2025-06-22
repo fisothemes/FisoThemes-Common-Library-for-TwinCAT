@@ -446,6 +446,9 @@
     <Compile Include="POUs\F_RoundToDecimalPlaces.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_TruncateNumber.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\P_GetSystemInformation.TcPOU">
       <SubType>Code</SubType>
     </Compile>

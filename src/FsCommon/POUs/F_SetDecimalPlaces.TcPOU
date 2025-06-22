@@ -11,7 +11,10 @@ END_VAR
     <Implementation>
       <ST><![CDATA[F_SetDecimalPlaces := EXPT(10, nDecimalPlaces);
 F_SetDecimalPlaces := 
-	Tc2_Math.LTRUNC(fValue * F_SetDecimalPlaces) / F_SetDecimalPlaces;]]></ST>
+	LIMIT(
+		GVL_TypeValueLimits.LREAL_MIN,
+		F_TruncateNumber(fValue * F_SetDecimalPlaces) / F_SetDecimalPlaces,
+		GVL_TypeValueLimits.LREAL_MAX);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

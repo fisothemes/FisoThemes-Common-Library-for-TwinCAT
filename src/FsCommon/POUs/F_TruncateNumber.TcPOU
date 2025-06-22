@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_TruncateNumber" Id="{21fb8d95-ae1a-068d-3900-b3e5268db0be}" SpecialFunc="None">
+    <Declaration><![CDATA[// Safely retrieves the integer part of a LREAL by truncating the fractional
+// component towards zero, without converting to an integer type.
+// This avoids PLC crashes caused by casting large LREALs to LINT.
+//
+// The logic works as follows:
+// - For positive numbers: use Tc2_Math.FLOOR(-x) negated → effectively truncates
+// - For negative numbers: use Tc2_Math.FLOOR(x) directly → keeps integer part
+//
+// [Examples]
+//  F_TruncateNumber( 3.75 ) →  3.0,
+//  F_TruncateNumber(-3.75 ) → -3.0,
+//  F_TruncateNumber( 0.99 ) →  0.0,
+//  F_TruncateNumber(-0.99 ) →  0.0,
+//  F_TruncateNumber( 1.7e+308 ) → 1.7e+308 (no crash)
+//
+// This function is a safe alternative to TRUNC() or Tc2_Math.TRUNC(), especially
+// for edge cases near the limits of the LREAL type.
+FUNCTION F_TruncateNumber : LREAL // The integer part of a LREAL by truncating the fractional component towards zero.
+VAR_INPUT
+	fValue : LREAL; // The input floating-point value to truncate
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_TruncateNumber :=
+	SEL(fValue < 0, Tc2_Math.FLOOR(fValue), -Tc2_Math.FLOOR(-fValue));]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
