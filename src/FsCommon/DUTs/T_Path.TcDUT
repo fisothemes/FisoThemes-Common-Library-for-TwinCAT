@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_Path" Id="{17c94c13-8c3b-0e66-1830-ec45a92a77b7}">
+    <Declaration><![CDATA[// Type alias for a file path string.
+// [note] Change the maximum length of the path string in `PARAM_Constants.PATH_LENGTH`
+TYPE T_Path : STRING(PARAM_Constants.PATH_LENGTH); END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

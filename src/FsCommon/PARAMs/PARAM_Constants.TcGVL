@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="PARAM_Constants" Id="{d71b13d1-4764-061a-28c0-ad0cc4c2a8f0}" ParameterList="True">
+    <Declaration><![CDATA[// Main parameters for the library.
+{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+	PATH_LENGTH			: __UXINT := 300; // String length of path type.
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

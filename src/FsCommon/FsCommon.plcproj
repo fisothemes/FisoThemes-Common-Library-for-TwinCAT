@@ -57,6 +57,12 @@
     <Compile Include="DUTs\T_ArrayIterator.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\T_Path.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\T_WPath.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\U_Primitive.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -138,6 +144,10 @@
     </Compile>
     <Compile Include="ITFs\I_Destructable.TcIO">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PARAMs\PARAM_Constants.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
