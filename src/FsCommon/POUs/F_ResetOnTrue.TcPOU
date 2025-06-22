@@ -7,7 +7,8 @@ VAR_INPUT
 	bValue : REFERENCE TO BOOL; // Boolean value to reset.
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bValue THEN bValue := FALSE; F_ResetOnTrue := TRUE; END_IF]]></ST>
+      <ST><![CDATA[F_ResetOnTrue 	:= bValue;
+bValue 			:= FALSE;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
