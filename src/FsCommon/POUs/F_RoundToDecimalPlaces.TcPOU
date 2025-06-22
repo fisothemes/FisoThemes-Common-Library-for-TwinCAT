@@ -13,8 +13,8 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[fMultiplier := EXPT(10, nDecimalPlaces);
-F_RoundToDecimalPlaces := fValue * fMultiplier;
-fTrunc := Tc2_Math.LTRUNC(F_RoundToDecimalPlaces);
+F_RoundToDecimalPlaces := LIMIT(GVL_TypeValueLimits.LREAL_MIN, fValue * fMultiplier, GVL_TypeValueLimits.LREAL_MIN);
+fTrunc := F_TruncateNumber(F_RoundToDecimalPlaces);
 
 F_RoundToDecimalPlaces := 
 	(fTrunc + SEL(F_RoundToDecimalPlaces - fTrunc >= 0.5, 0, 1)) / fMultiplier;]]></ST>
