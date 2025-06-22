@@ -425,6 +425,9 @@
     <Compile Include="POUs\F_SetDecimalPlaces.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_SetOnFalse.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_SwapMemory.TcPOU">
       <SubType>Code</SubType>
     </Compile>

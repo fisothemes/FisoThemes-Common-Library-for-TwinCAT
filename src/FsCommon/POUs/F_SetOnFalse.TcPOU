@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_SetOnFalse" Id="{e0f7f683-639f-0a70-0cc8-f72bf13e651c}" SpecialFunc="None">
+    <Declaration><![CDATA[// Sets the boolean value to true if it is false and returns true if it was false before being set.
+FUNCTION F_SetOnFalse : BOOL // Whether the value was false before setting.
+VAR_INPUT
+    bValue : REFERENCE TO BOOL; // Boolean value to set.
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_SetOnFalse 	:= NOT bValue;
+bValue 			:= TRUE;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
