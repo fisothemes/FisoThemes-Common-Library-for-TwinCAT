@@ -416,6 +416,9 @@
     <Compile Include="POUs\F_AllAreTrue.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_IsFunctionBlock.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_IsReadablePointer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
