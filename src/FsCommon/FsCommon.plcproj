@@ -371,6 +371,9 @@
     <Compile Include="POUs\F_AnyAreFalse.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_AreSameTypeFromInterfaces.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_ExtractVariableNameFromPath.TcPOU">
       <SubType>Code</SubType>
     </Compile>

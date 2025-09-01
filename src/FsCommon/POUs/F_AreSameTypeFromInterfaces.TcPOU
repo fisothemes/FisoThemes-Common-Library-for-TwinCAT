@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_AreSameTypeFromInterfaces" Id="{8f5a2477-091e-0eca-1f9e-a021720a2ad9}" SpecialFunc="None">
+    <Declaration><![CDATA[// Checks if both interfaces come from the same concrete FB type.
+FUNCTION F_AreSameTypeFromInterfaces : BOOL // TRUE if supplied interfaces are from the same concrete type.
+VAR_INPUT
+	// Interface to compare.
+	ipA	: __SYSTEM.IQueryInterface;
+	// Interface to compare.
+	ipB : __SYSTEM.IQueryInterface;
+END_VAR
+VAR
+	pA, pB : POINTER TO __UXINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[pA := F_GetAddressFromInterface(ipA);
+pB := F_GetAddressFromInterface(ipB);
+
+F_AreSameTypeFromInterfaces := (pA <> 0 AND pB <> 0) AND_THEN pA^ = pB^;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
