@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_IsReadablePointer" Id="{64f8419c-84ee-0745-0049-c0fc706b418f}" SpecialFunc="None">
+    <Declaration><![CDATA[// Checks if a pointer is in a readable memory area (static/dynamic).
+FUNCTION F_IsReadablePointer : BOOL // TRUE if the given pointer refers to a readable memory area.
+VAR_INPUT
+	// Pointer to check for readability.
+	pValue : POINTER TO BYTE;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE F_GetAddressMemoryArea(pValue) OF 
+	E_AddressMemoryArea.Static,
+	E_AddressMemoryArea.Dynamic:
+		F_IsReadablePointer := TRUE;
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
