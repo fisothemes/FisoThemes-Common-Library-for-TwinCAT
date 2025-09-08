@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="F_IsFunctionBlock" Id="{90f7e604-cf59-0534-075a-85679a02d1bc}" SpecialFunc="None">
+  <POU Name="F_IsPointerToFunctionBlock" Id="{90f7e604-cf59-0534-075a-85679a02d1bc}" SpecialFunc="None">
     <Declaration><![CDATA[// Tries to guess if the given pointer refers to a function block instance. 
 // [note] 
-// This is heuristic and can be inaccurate. For reliable checks, the FB 
-// must implement __SYSTEM.IQueryInterface. If the FB does not implement
-// IQueryInterface, its type cannot be safely determined.
-FUNCTION F_IsFunctionBlock : BOOL // TRUE if pointer appears to be a function block instance.
+// This is heuristic and can be inaccurate. The FB MUST implement 
+// __SYSTEM.IQueryInterface. If the FB does not implement IQueryInterface,
+// its type cannot be determined.
+FUNCTION F_IsPointerToFunctionBlock : BOOL // TRUE if pointer appears to be a function block instance.
 VAR_INPUT
 	// Pointer to test.
 	pValue : POINTER TO BYTE;
@@ -29,7 +29,7 @@ ELSE
 CASE F_GetAddressMemoryArea(pCheck) OF 
 	E_AddressMemoryArea.Static,
 	E_AddressMemoryArea.Dynamic:
-		F_IsFunctionBlock := pCheck^ = SIZEOF(__UXINT);
+		F_IsPointerToFunctionBlock := pCheck^ = SIZEOF(__UXINT);
 	END_CASE]]></ST>
     </Implementation>
   </POU>
