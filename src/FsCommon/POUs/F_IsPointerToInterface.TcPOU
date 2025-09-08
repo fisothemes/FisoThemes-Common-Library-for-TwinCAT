@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_IsPointerToInterface" Id="{63c67f12-53a1-0666-3b97-a432dece7b89}" SpecialFunc="None">
+    <Declaration><![CDATA[// Tries to guess if the given pointer refers to an interface instance.
+// [note]
+// This is heuristic and can be inaccurate. The object MUST implement 
+// __SYSTEM.IQueryInterface. If IQueryInterface is not implemented,
+// the type cannot be determined.
+FUNCTION F_IsPointerToInterface : BOOL // TRUE if pointer appears to be an interface instance.
+VAR_INPUT
+	// Pointer to test.
+	pValue : POINTER TO BYTE;
+END_VAR
+VAR
+	pCheck : POINTER TO __UXINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[pCheck := pValue;
+
+CASE F_GetAddressMemoryArea(pCheck) OF 
+	E_AddressMemoryArea.Static,
+	E_AddressMemoryArea.Dynamic:
+		pCheck := pCheck^;
+ELSE
+	RETURN;
+	END_CASE
+	
+CASE F_GetAddressMemoryArea(pCheck) OF 
+	E_AddressMemoryArea.Static,
+	E_AddressMemoryArea.Dynamic:
+		pCheck := pCheck^;
+ELSE
+	RETURN;
+	END_CASE
+	
+CASE F_GetAddressMemoryArea(pCheck) OF 
+	E_AddressMemoryArea.Static,
+	E_AddressMemoryArea.Dynamic:
+		F_IsPointerToInterface := pCheck^ = SIZEOF(__UXINT);
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
