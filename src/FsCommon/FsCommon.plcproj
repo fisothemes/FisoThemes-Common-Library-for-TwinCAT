@@ -374,6 +374,9 @@
     <Compile Include="POUs\F_AreSameTypeFromInterfaces.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_ExtractPointerFromInterface.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_ExtractVariableNameFromPath.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -416,7 +419,10 @@
     <Compile Include="POUs\F_AllAreTrue.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_IsFunctionBlock.TcPOU">
+    <Compile Include="POUs\F_IsPointerToFunctionBlock.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_IsPointerToInterface.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_IsReadablePointer.TcPOU">
