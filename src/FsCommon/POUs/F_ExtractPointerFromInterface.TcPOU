@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_ExtractPointerFromInterface" Id="{ca5a1699-7c93-0173-3269-b173b8a5ed2d}" SpecialFunc="None">
+    <Declaration><![CDATA[// Extracts the underlying object pointer from an interface pointer.
+// [note] The interface must inherit from __SYSTEM.IQueryInterface, otherwise the check is not valid.
+FUNCTION F_ExtractPointerFromInterface : POINTER TO BYTE // Returns pointer to the concrete object or 0 if invalid.
+VAR_INPUT
+	// Address of the interface (e.g. ADR(ipInterface)).
+	pInterface : POINTER TO BYTE;
+END_VAR
+VAR
+	pTmp : POINTER TO POINTER TO BYTE := pInterface;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[RETURN( NOT(F_IsReadablePointer(pInterface) AND F_IsPointerToInterface(pInterface)) );
+
+F_ExtractPointerFromInterface := pTmp^;
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
