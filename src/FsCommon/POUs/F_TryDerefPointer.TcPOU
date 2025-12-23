@@ -3,7 +3,7 @@
   <POU Name="F_TryDerefPointer" Id="{db7a4388-c12a-05b8-3a80-c5e1220360cd}" SpecialFunc="None">
     <Declaration><![CDATA[// Attempts to dereference a pointer up to a given number of levels.
 // [note] the given pointer is returned if Levels is 0.
-FUNCTION F_TryDerefPointer : POINTER TO BYTE // Final dereferenced pointer or 0 if not readable.
+FUNCTION F_TryDerefPointer : POINTER TO BYTE // Final dereferenced readable pointer.
 VAR_INPUT
 	// Pointer to start dereferencing from.
 	pValue : POINTER TO BYTE;
