@@ -19,7 +19,7 @@
     <Company>FisoThemes</Company>
     <Released>false</Released>
     <Title>FsCommon</Title>
-    <ProjectVersion>0.5.0</ProjectVersion>
+    <ProjectVersion>0.6.0</ProjectVersion>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{dd9b7bed-6894-42d1-82c5-149be3e6aacd}</Id>
@@ -34,6 +34,7 @@
     <DefaultNamespace>FsCommon</DefaultNamespace>
     <CombineIds>true</CombineIds>
     <Description>A library that contains common utilites and definitiions to streamline and standardise the development of PLC applications.</Description>
+    <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DUTs\E_Accessor.TcTLEO">
