@@ -410,6 +410,9 @@
     <Compile Include="POUs\F_GetNumberOfPlcTasks.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_GetTypeID.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_GetTypeIDFromGeneric.TcPOU">
       <SubType>Code</SubType>
     </Compile>

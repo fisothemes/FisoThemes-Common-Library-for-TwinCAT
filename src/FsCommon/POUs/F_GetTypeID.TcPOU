@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetTypeID" Id="{39d6f6a1-6ece-0a0a-2689-41d8feeaea8c}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the type identifier for any variable.
+// [note]
+// This relies on heuristics and may require the FB to implement 
+// __SYSTEM.IQueryInterface for reliable detection.
+FUNCTION F_GetTypeID : T_TypeID // The unique Type ID or TypeClass value.
+VAR_INPUT
+	// The variable to inspect.
+	Variable : ANY;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetTypeID := F_GetTypeIDFromGeneric(Variable);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
