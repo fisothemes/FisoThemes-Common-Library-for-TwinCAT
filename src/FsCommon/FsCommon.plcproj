@@ -60,6 +60,9 @@
     <Compile Include="DUTs\T_Path.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\T_TypeID.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\T_WPath.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -405,6 +408,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_GetNumberOfPlcTasks.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_GetTypeIDFromGeneric.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_GetVariablePathByAddress.TcPOU">

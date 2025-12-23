@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetTypeIDFromGeneric" Id="{ed2a989c-89b0-0e9c-3efc-dac21af2367d}" SpecialFunc="None">
+    <Declaration><![CDATA[// Retrieves the type identifier for a generic variable.
+// [note]
+// This relies on heuristics and may require the FB to implement 
+// __SYSTEM.IQueryInterface for reliable detection.
+FUNCTION F_GetTypeIDFromGeneric : T_TypeID // The unique Type ID or TypeClass value.
+VAR_INPUT
+	// The generic variable descriptor to inspect.
+	Variable : T_Generic;
+END_VAR
+VAR
+	pFB 	 : POINTER TO __UXINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Variable.pValue = 0 THEN 
+	F_GetTypeIDFromGeneric := T_TypeClass.TYPE_NONE; 
+	RETURN; 
+	END_IF
+
+CASE Variable.TypeClass OF
+	T_TypeClass.TYPE_USERDEF:
+		IF F_IsPointerToInterface(Variable.pValue) THEN 
+			F_GetTypeIDFromGeneric := 100;
+		ELSIF F_IsPointerToFunctionBlock(Variable.pValue) THEN 
+			pFB := Variable.pValue;
+			F_GetTypeIDFromGeneric := pFB^;
+		ELSE 
+			F_GetTypeIDFromGeneric := T_TypeClass.TYPE_USERDEF; 
+			END_IF
+ELSE
+	F_GetTypeIDFromGeneric := Variable.TypeClass;
+	END_CASE]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
