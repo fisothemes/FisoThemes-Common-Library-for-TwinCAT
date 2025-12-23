@@ -19,7 +19,7 @@
     <Company>FisoThemes</Company>
     <Released>false</Released>
     <Title>FsCommon</Title>
-    <ProjectVersion>0.5.0</ProjectVersion>
+    <ProjectVersion>0.6.0</ProjectVersion>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{dd9b7bed-6894-42d1-82c5-149be3e6aacd}</Id>
@@ -34,6 +34,7 @@
     <DefaultNamespace>FsCommon</DefaultNamespace>
     <CombineIds>true</CombineIds>
     <Description>A library that contains common utilites and definitiions to streamline and standardise the development of PLC applications.</Description>
+    <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DUTs\E_Accessor.TcTLEO">
@@ -58,6 +59,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\T_Path.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\T_TypeID.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\T_WPath.TcDUT">
@@ -371,6 +375,12 @@
     <Compile Include="POUs\F_AnyAreFalse.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_AreSameTypeFromInterfaces.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_ExtractPointerFromInterface.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_ExtractVariableNameFromPath.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -401,6 +411,12 @@
     <Compile Include="POUs\F_GetNumberOfPlcTasks.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_GetTypeID.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_GetTypeIDFromGeneric.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_GetVariablePathByAddress.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -411,6 +427,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_AllAreTrue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_IsPointerToFunctionBlock.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_IsPointerToInterface.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_IsReadablePointer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_Lerp.TcPOU">
@@ -450,6 +475,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_TruncateNumber.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_TryDerefPointer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\P_GetSystemInformation.TcPOU">

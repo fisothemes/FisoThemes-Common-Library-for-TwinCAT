@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="T_TypeID" Id="{b6c9b036-afc1-0bf2-1d7e-809bf7406137}">
+    <Declaration><![CDATA[TYPE T_TypeID : __UXINT; END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
