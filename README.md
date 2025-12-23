@@ -160,9 +160,10 @@ Utilities to safely inspect and traverse pointers, preventing runtime exceptions
 - `F_IsPointerToFunctionBlock`: (Heuristic) Checks if a pointer appears to point to a valid Function Block instance.
 - `F_IsPointerToInterface`: (Heuristic) Checks if a pointer appears to point to an Interface.
 
-> ![NOTE]
+> [!NOTE]
 > 
 > When using `F_IsPointerToInterface` and `F_IsPointerToFunctionBlock` make sure to implement `__SYSTEM.IQueryInterface` on your Function Block and Interface types.
+> 
 
 ```js
 VAR
@@ -235,9 +236,10 @@ IF F_GetTypeID(fbInstanceA) = F_GetTypeID(fbInstanceC) THEN
 END_IF
 ```
 
-> ![NOTE]
+> [!NOTE]
 >
 > `F_GetTypeID` and `F_GetTypeIDFromGeneric` rely on heuristics and may require a FB to implement `__SYSTEM.IQueryInterface` for reliable detection.
+> 
 
 ## Developer Notes
 This project is still in development. There's a lot of work and testing ahead. Changes to functionality may occur in the future.
