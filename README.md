@@ -50,7 +50,7 @@ fbValueChangeDetector(Value := nValue);
 // Check if the value has changed
 IF fbValueChangeDetector.HasChanged THEN
     // Handle the value change
-    END_IF
+END_IF
 ```
 
 ### Example: PLC Task Information
@@ -103,7 +103,7 @@ END_VAR
 // Check if the task cycle has changed
 IF fbTaskCycleChanged.HasChanged THEN
     // Handle the task cycle change
-    END_IF
+END_IF
 ...
 END_METHOD
 ```
@@ -151,6 +151,93 @@ END_VAR
 nLower := F_GetLRealArrayLowerBound(arValues);
 nUpper := F_GetLRealArrayUpperBound(arValues);
 ```
+
+### Example: Pointer Safety and Analysis
+Utilities to safely inspect and traverse pointers, preventing runtime exceptions during memory access.
+
+- `F_IsReadablePointer`: Returns `TRUE` if the pointer addresses a valid, readable memory area (Static or Dynamic).
+- `F_TryDerefPointer`: safely attempts to dereference a pointer chain up to `n` levels deep. Always returns the last readable pointer.
+- `F_IsPointerToFunctionBlock`: (Heuristic) Checks if a pointer appears to point to a valid Function Block instance.
+- `F_IsPointerToInterface`: (Heuristic) Checks if a pointer appears to point to an Interface.
+
+> ![NOTE]
+> 
+> When using `F_IsPointerToInterface` and `F_IsPointerToFunctionBlock` make sure to implement `__SYSTEM.IQueryInterface` on your Function Block and Interface types.
+
+```js
+VAR
+    ...
+    pUnknown : POINTER TO BYTE;
+    pDeep    : POINTER TO POINTER TO BYTE;
+    pResult  : POINTER TO BYTE;
+    pObject  : POINTER TO FB_Object := ADR(fbMyObject);
+END_VAR
+
+// Check if pointer is pointing to valid memory.
+IF F_IsReadablePointer(pUnknown) THEN
+    // Safe to access pUnknown^
+END_IF
+
+// Safely dereference a pointer of unknown depth
+// Returns last readable pointer
+pResult := F_TryDerefPointer(pDeep, 2); 
+
+// Heuristic check: Is this a Function Block?
+IF F_IsPointerToFunctionBlock(pObject) THEN
+   // Likely a valid FB instance
+END_IF
+```
+
+### Example: Interface Introspection
+Inspect the relationship between Interfaces and their underlying Function Blocks.
+
+- `F_AreSameTypeFromInterfaces`: Checks if two different interface pointers actually originate from instances of the same concrete Function Block type.
+- `F_ExtractPointerFromInterface`:
+
+```js
+VAR
+    fbInstanceA, fbInstanceB : FB_MyObject;
+    ipA         : I_MyInterface := fbInstanceA;
+    ipB         : I_MyInterface := fbInstanceB;
+    pInterface  : POINTER TO BYTE;
+END_VAR
+
+// Check if both interfaces come from the same FB type
+IF F_AreSameTypeFromInterfaces(ipA, ipB) THEN
+    // Validates that ipA and ipB refer to FBs of the same class
+    // (Useful for safe casting or comparison logic)
+END_IF
+
+// Extract the raw pointer from the interface usually displayed in Online Mode.
+pInterface := F_ExtractPointerFromInterface(ADR(ipA));
+```
+
+### Example: Runtime Type Identification
+Efficiently identify and compare the concrete types of variables or Function Blocks without relying on slow string comparisons.
+
+- `F_GetTypeID`: Retrieves a unique identifier (`T_TypeID`) for the variable's type. For Function Blocks, this returns the internal VTable pointer.
+- `F_GetTypeIDFromGeneric`: Advanced variant handling `T_Generic` inputs.
+
+```js
+VAR
+    fbInstanceA : FB_MyCustomBlock;
+    fbInstanceB : FB_MyCustomBlock; // Same type as A
+    fbInstanceC : FB_OtherBlock;    // Different type
+END_VAR
+
+// Check if two instances are of the exact same class
+IF F_GetTypeID(fbInstanceA) = F_GetTypeID(fbInstanceB) THEN
+    // TRUE: They are the same type
+END_IF
+
+IF F_GetTypeID(fbInstanceA) = F_GetTypeID(fbInstanceC) THEN
+    // FALSE: They are different types
+END_IF
+```
+
+> ![NOTE]
+>
+> `F_GetTypeID` and `F_GetTypeIDFromGeneric` rely on heuristics and may require a FB to implement `__SYSTEM.IQueryInterface` for reliable detection.
 
 ## Developer Notes
 This project is still in development. There's a lot of work and testing ahead. Changes to functionality may occur in the future.
