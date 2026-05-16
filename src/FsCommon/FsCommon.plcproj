@@ -35,6 +35,7 @@
     <CombineIds>true</CombineIds>
     <Description>A library that contains common utilites and definitiions to streamline and standardise the development of PLC applications.</Description>
     <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
+    <DocFormat>reStructuredText</DocFormat>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DUTs\E_Accessor.TcTLEO">
