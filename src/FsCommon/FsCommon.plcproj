@@ -391,6 +391,9 @@
     <Compile Include="POUs\F_GetCpuCycleCounter.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_GetCurrentTaskCycleTime.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_GetCurrentPlcTaskInformation.TcPOU">
       <SubType>Code</SubType>
     </Compile>

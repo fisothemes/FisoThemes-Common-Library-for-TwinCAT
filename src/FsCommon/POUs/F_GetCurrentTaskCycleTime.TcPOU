@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetCurrentTaskCycleTime" Id="{aaf7f590-8048-0c9b-33aa-cb9fb4a71a45}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+Returns the cycle time of the task that calls this function.
+
+The value is retrieved at runtime and reflects the actual configured cycle time
+of the calling task. Returns ``LTIME#0`` if called outside of a task context.
+*)
+FUNCTION F_GetCurrentTaskCycleTime : LTIME
+VAR
+	fbGetCurrentTaskIndex : Tc2_System.GETCURTASKINDEX;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbGetCurrentTaskIndex();
+F_GetCurrentTaskCycleTime := TO_LTIME(
+	TwinCAT_SystemInfoVarList._TaskInfo[fbGetCurrentTaskIndex.Index].CycleTime * 100);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
