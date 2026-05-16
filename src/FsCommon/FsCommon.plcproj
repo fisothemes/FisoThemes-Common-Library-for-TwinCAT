@@ -397,6 +397,9 @@
     <Compile Include="POUs\F_GetCurrentPlcTaskInformation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_GetCurrentTaskIndex.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\F_GetInf.TcPOU">
       <SubType>Code</SubType>
     </Compile>

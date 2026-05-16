@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetCurrentTaskIndex" Id="{9290cc24-abd2-03dc-065e-9ac4c762564f}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+Returns the index of the task that calls this function.
+
+..note:: Falls back to task index 1 if  called outside the real-time context.
+*)
+FUNCTION F_GetCurrentTaskIndex : DINT
+VAR
+	fbGetCurrentTaskIndex : Tc2_System.GETCURTASKINDEX;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbGetCurrentTaskIndex();
+F_GetCurrentTaskIndex := fbGetCurrentTaskIndex.Index;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
