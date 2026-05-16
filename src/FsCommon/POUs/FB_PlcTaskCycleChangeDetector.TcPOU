@@ -87,6 +87,7 @@ END_VAR
     <Property Name="TaskIndex" Id="{82f90d42-16df-082c-189e-8c77f536c352}">
       <Declaration><![CDATA[// The index of the task being monitored.
 // [get] Returns the index.
+// [set] The index of the task to monitor (clamp to a minimum of 1).
 PROPERTY TaskIndex : DINT]]></Declaration>
       <Get Name="Get" Id="{a7378cce-5e3a-00aa-06dd-a161589578f4}">
         <Declaration><![CDATA[VAR
@@ -96,6 +97,14 @@ END_VAR
           <ST><![CDATA[TaskIndex := THIS^._nTaskIndex;]]></ST>
         </Implementation>
       </Get>
+      <Set Name="Set" Id="{02358813-c82e-0a17-3070-b7ae46543976}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[THIS^._nTaskIndex := LIMIT(1, TaskIndex, F_SizeToDint(F_GetNumberOfPlcTasks()));]]></ST>
+        </Implementation>
+      </Set>
     </Property>
   </POU>
 </TcPlcObject>
