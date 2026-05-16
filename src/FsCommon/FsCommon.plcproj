@@ -150,6 +150,9 @@
     <Compile Include="ITFs\I_Destructable.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ITFs\I_Runnable.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PARAMs\PARAM_Constants.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -212,6 +215,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Bounds\F_GetRealArrayUpperBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetRunnableArrayLowerBound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Bounds\F_GetRunnableArrayUpperBound.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Bounds\F_GetSIntArrayUpperBound.TcPOU">
@@ -449,6 +458,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_ResetOnTrue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_RunAllRunnables.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_SearchMemory.TcPOU">

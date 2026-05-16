@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetRunnableArrayLowerBound" Id="{c0a2bbfd-fa17-098b-1d31-6f1edd9b3c20}" SpecialFunc="None">
+    <Declaration><![CDATA[(* Gets the lower bound index of :itf:`I_Runnable` array.*)
+FUNCTION F_GetRunnableArrayLowerBound : T_Position
+VAR_IN_OUT
+	arRunnables : ARRAY[*] OF REAL; // The array to query.
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_GetRunnableArrayLowerBound := LOWER_BOUND(arRunnables, 1);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

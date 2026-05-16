@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Runnable" Id="{c7f3357b-ff98-0bb8-1fda-133e77691f31}">
+    <Declaration><![CDATA[(*
+Interface for objects that expose a cyclic :meth:`Run` method.
+
+Use :func:`F_IsRunnable` to check whether an object implements this interface
+at runtime before calling :meth:`Run`.
+*)
+INTERFACE I_Runnable EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Method Name="Run" Id="{d54a3a7f-0264-0531-3094-b58ac51090ab}">
+      <Declaration><![CDATA[(* Executes one cycle of the object's logic. Call only once per cycle on a single task. *)
+METHOD Run
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

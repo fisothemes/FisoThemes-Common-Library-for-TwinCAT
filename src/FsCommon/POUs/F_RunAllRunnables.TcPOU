@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_RunAllRunnables" Id="{1050d424-a043-04fa-1693-5bd275b5500d}" SpecialFunc="None">
+    <Declaration><![CDATA[(*
+Calls :meth:`I_Runnable.Run` on every non-null entry in the given array.
+
+Entries set to ``0`` are skipped, so sparse arrays are safe to pass in.
+The array bounds are read at runtime, so any fixed size array is accepted.
+*)
+FUNCTION F_RunAllRunnables
+VAR_IN_OUT
+	// Reference to the array containing the runnables to run.
+	arRunnables : ARRAY[*] OF I_Runnable;
+END_VAR
+VAR
+	i : T_Position;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := LOWER_BOUND(arRunnables, 1) TO UPPER_BOUND(arRunnables, 1) DO
+	IF arRunnables[i] = 0 THEN CONTINUE; END_IF
+	arRunnables[i].Run();
+END_FOR]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
